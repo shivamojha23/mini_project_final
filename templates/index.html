@@ -516,16 +516,29 @@
                         <div class="module-options active" id="module-route">
                             <div class="form-group">
                                 <label>Date of Journey</label>
-                                <input type="date" class="date-input-standalone" />
+                                <input type="date" name="date" class="date-input-standalone" value="{{ date }}" required />
                             </div>
-                            <div class="form-group">
-                                <label>Preferences</label>
-                                <select class="pref-select">
-                                    <option>⚡ Fastest Route</option>
-                                    <option>💰 Cheapest Route</option>
-                                    <option>😌 Most Comfortable</option>
-                                    <option>⚖️ Balanced</option>
-                                </select>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
+                                <div style="display: flex; flex-direction: column;">
+                                    <label style="display: block; font-size: 12px; font-weight: 600; color: var(--text-sec); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; font-family: 'Rajdhani', sans-serif;">Priority</label>
+                                    <select name="preference" class="pref-select">
+                                        <option {% if preference == "Fastest" %}selected{% endif %}>⚡ Fastest Route</option>
+                                        <option {% if preference == "Cheapest" %}selected{% endif %}>💰 Cheapest Route</option>
+                                        <option {% if preference == "Comfortable" %}selected{% endif %}>😌 Most Comfortable</option>
+                                        <option {% if preference == "Balanced" %}selected{% endif %}>⚖️ Balanced</option>
+                                    </select>
+                                </div>
+                                <div style="display: flex; flex-direction: column;">
+                                    <label style="display: block; font-size: 12px; font-weight: 600; color: var(--text-sec); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; font-family: 'Rajdhani', sans-serif;">Preferred Mode</label>
+                                    <select name="preferred_mode" class="pref-select">
+                                        <option value="" {% if not preferred_mode %}selected{% endif %}>🌐 Any Mode</option>
+                                        <option value="Train" {% if preferred_mode == "Train" %}selected{% endif %}>🚆 Train</option>
+                                        <option value="Bus" {% if preferred_mode == "Bus" %}selected{% endif %}>🚌 Bus</option>
+                                        <option value="Flight" {% if preferred_mode == "Flight" %}selected{% endif %}>✈️ Flight</option>
+                                        <option value="Taxi" {% if preferred_mode == "Taxi" %}selected{% endif %}>🚖 Taxi/Cab</option>
+                                        <option value="Personal" {% if preferred_mode == "Personal" %}selected{% endif %}>🚗 Personal</option>
+                                    </select>
+                                </div>
                             </div>
                             <button type="submit" class="search-btn">
                                 <i data-lucide="navigation-2" class="btn-icon-img"></i> Find Best Route
@@ -537,6 +550,7 @@
                             <form action="/plan" method="GET">
                                 <input type="hidden" name="source" id="train_sidebar_source_bridge">
                                 <input type="hidden" name="destination" id="train_sidebar_destination_bridge">
+                                <input type="hidden" name="history_id" value="{{ history_id }}">
 
                                 <div class="form-group">
                                     <label>Date of Travel</label>
@@ -552,6 +566,7 @@
                             <form action="/bus" method="GET">
                                 <input type="hidden" name="source" id="bus_sidebar_source_bridge">
                                 <input type="hidden" name="destination" id="bus_sidebar_destination_bridge">
+                                <input type="hidden" name="history_id" value="{{ history_id }}">
 
                                 <div class="form-group">
                                     <label>Date of Travel</label>
@@ -567,6 +582,7 @@
                             <form action="/flight/results" method="GET">
                                 <input type="hidden" name="from_place" id="flight_sidebar_source_bridge">
                                 <input type="hidden" name="to_place" id="flight_sidebar_destination_bridge">
+                                <input type="hidden" name="history_id" value="{{ history_id }}">
                                 
                                 <div class="form-group">
                                     <label>Date of Travel</label>
@@ -592,6 +608,61 @@
                 {% if has_route and distance %}
                 <div class="results-wrapper show" id="resultsWrapper">
                     <div class="success-message show">✨ Optimal routes identified below.</div>
+
+                    {% if recommendation %}
+                    <div class="rec-card" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(13, 30, 54, 0.95) 100%); border: 2px solid var(--gold); border-radius: var(--radius); padding: 20px; margin-bottom: 24px; box-shadow: 0 0 20px rgba(245, 158, 11, 0.25); position: relative; animation: slideDown 0.4s ease;">
+                        <div style="position: absolute; top: -12px; right: 20px; background: var(--gold); color: #000; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.5px; box-shadow: 0 4px 10px rgba(245,158,11,0.4); display: flex; align-items: center; gap: 4px; font-family: 'Rajdhani', sans-serif; text-transform: uppercase;">
+                            <span>🌟 Recommended</span>
+                        </div>
+                        <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 18px; font-weight: 700; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="sparkles" style="width: 18px; height: 18px;"></i> Personalized Recommendation for You
+                        </h4>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid rgba(245, 158, 11, 0.15); padding-bottom: 12px;">
+                            <div>
+                                <span style="font-size: 18px; font-weight: 600; color: #fff;">{{ recommendation.recommended_option.name }}</span>
+                                <span style="background: rgba(59, 130, 246, 0.15); color: var(--blue-neon); font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 12px; margin-left: 8px; text-transform: uppercase; font-family: 'Rajdhani', sans-serif; border: 1px solid var(--border-glow);">{{ recommendation.recommended_option.mode }}</span>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 20px; font-weight: 700; color: var(--green); font-family: 'Rajdhani', sans-serif;">₹{{ recommendation.recommended_option.price|int }}</div>
+                                <div style="font-size: 12px; color: var(--text-sec);">Est. Duration: {{ (recommendation.recommended_option.duration / 60)|round(1) }} hrs</div>
+                            </div>
+                        </div>
+                        <p style="font-size: 13px; color: var(--text-pri); line-height: 1.5; margin-bottom: 14px;">
+                            {{ recommendation.explanation }}
+                        </p>
+                        
+                        {% if recommendation.recommended_option.mode == "Personal" %}
+                        <div style="font-size: 12px; color: var(--text-sec); font-style: italic; display: flex; align-items: center; gap: 6px;">
+                            <i data-lucide="info" style="width: 14px; height: 14px;"></i> Navigate your personal vehicle using the map route on the right.
+                        </div>
+                        {% elif recommendation.recommended_option.mode == "Taxi" %}
+                        <a href="https://www.makemytrip.com/cabs/" target="_blank" class="ride-submit-btn booking-link" data-history-id="{{ history_id }}" data-mode="Taxi" style="display:block; text-align:center; text-decoration:none; background: var(--green); color: #000; font-weight: 700; border: none; padding: 10px 16px; border-radius: var(--radius-sm); font-size: 13px; transition: var(--transition);">🚖 Book Recommended Cab now →</a>
+                        {% elif recommendation.recommended_option.mode == "Train" %}
+                        <a href="/plan?source={{ source }}&destination={{ destination }}&date={{ date }}&history_id={{ history_id }}" class="ride-submit-btn" style="display:block; text-align:center; text-decoration:none; background: var(--blue-vivid); color: #fff; font-weight: 600; border: none; padding: 10px 16px; border-radius: var(--radius-sm); font-size: 13px; transition: var(--transition);">🚆 Check Train Details & Book →</a>
+                        {% elif recommendation.recommended_option.mode == "Bus" %}
+                        <a href="/bus?source={{ source }}&destination={{ destination }}&date={{ date }}&history_id={{ history_id }}" class="ride-submit-btn" style="display:block; text-align:center; text-decoration:none; background: var(--bus-color); color: #fff; font-weight: 600; border: none; padding: 10px 16px; border-radius: var(--radius-sm); font-size: 13px; transition: var(--transition);">🚌 Check Bus Details & Book →</a>
+                        {% elif recommendation.recommended_option.mode == "Flight" %}
+                        <a href="/flight/results?from_place={{ source }}&to_place={{ destination }}&date={{ date }}&history_id={{ history_id }}" class="ride-submit-btn" style="display:block; text-align:center; text-decoration:none; background: #6366f1; color: #fff; font-weight: 600; border: none; padding: 10px 16px; border-radius: var(--radius-sm); font-size: 13px; transition: var(--transition);">✈️ View Flight Details & Book →</a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+
+                    <!-- Glassmorphic Post-Search Survey -->
+                    <div id="surveyPanel" class="rec-card" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(13, 30, 54, 0.9) 100%); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: var(--radius); padding: 18px; margin-bottom: 24px; box-shadow: var(--shadow-blue); position: relative; animation: slideDown 0.4s ease;">
+                        <h4 style="font-family: 'Rajdhani', sans-serif; font-size: 16px; font-weight: 600; color: var(--blue-neon); text-transform: uppercase; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                            <i data-lucide="check-square" style="width: 16px; height: 16px;"></i> Quick Survey
+                        </h4>
+                        <p style="font-size: 13px; color: var(--text-pri); margin-bottom: 12px; line-height: 1.4;">
+                            Which transit mode do you generally prefer for this route? Your feedback improves future personalized recommendations!
+                        </p>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <button type="button" onclick="submitSurvey('Train')" class="tab-btn" style="background: rgba(29, 111, 216, 0.15); border-color: rgba(29, 111, 216, 0.4); color: #fff;">🚆 Train</button>
+                            <button type="button" onclick="submitSurvey('Bus')" class="tab-btn" style="background: rgba(249, 115, 22, 0.15); border-color: rgba(249, 115, 22, 0.4); color: #fff;">🚌 Bus</button>
+                            <button type="button" onclick="submitSurvey('Flight')" class="tab-btn" style="background: rgba(99, 102, 241, 0.15); border-color: rgba(99, 102, 241, 0.4); color: #fff;">✈️ Flight</button>
+                            <button type="button" onclick="submitSurvey('Taxi')" class="tab-btn" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: #fff;">🚖 Cab</button>
+                            <button type="button" onclick="submitSurvey('Personal')" class="tab-btn" style="background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.15); color: #fff;">🚗 Personal</button>
+                        </div>
+                    </div>
 
                     <div class="section-label">
                         <h3>Available Options</h3>
@@ -656,7 +727,7 @@
                             <div class="ride-time">⏱️ {{ taxi_duration }}</div>
                             <div class="ride-note">Estimated base rate including dynamic surcharge estimates.</div>
                             <div style="margin-top: 14px;">
-                                <a href="https://www.makemytrip.com/cabs/" target="_blank" class="ride-submit-btn" style="display:block; text-align:center; text-decoration:none; background: #0d1e36; color: var(--green); border: 1px solid rgba(16,185,129,0.35);">🚖 Book Cab on MakeMyTrip →</a>
+                                <a href="https://www.makemytrip.com/cabs/" target="_blank" class="ride-submit-btn booking-link" data-history-id="{{ history_id }}" data-mode="Taxi" style="display:block; text-align:center; text-decoration:none; background: #0d1e36; color: var(--green); border: 1px solid rgba(16,185,129,0.35);">🚖 Book Cab on MakeMyTrip →</a>
                             </div>
                         </div>
 
@@ -665,6 +736,7 @@
                                 <span class="ride-type">Air Travel Schedules</span>
                             </div>
                             <form action="/flight/results" method="GET">
+                                <input type="hidden" name="history_id" value="{{ history_id }}">
                                 <input type="hidden" name="from_place" value="{{ source }}">
                                 <input type="hidden" name="to_place" value="{{ destination }}">
                                 <input type="hidden" name="from_lat" value="{{ s_lat }}">
@@ -693,6 +765,7 @@
                                 <span class="ride-type">Railway Connect</span>
                             </div>
                             <form action="/plan" method="GET">
+                                <input type="hidden" name="history_id" value="{{ history_id }}">
                                 <input type="hidden" name="source" value="{{ source }}">
                                 <input type="hidden" name="destination" value="{{ destination }}">
                                 <div class="ride-form-group">
@@ -708,6 +781,7 @@
                                 <span class="ride-type">Bus Connects</span>
                             </div>
                             <form action="/bus" method="GET">
+                                <input type="hidden" name="history_id" value="{{ history_id }}">
                                 <input type="hidden" name="source" value="{{ source }}">
                                 <input type="hidden" name="destination" value="{{ destination }}">
                                 <div class="ride-form-group">
@@ -935,6 +1009,74 @@
 
         setupAutocomplete("source", "source-suggestions");
         setupAutocomplete("destination", "destination-suggestions");
+
+        // Travel Recommendation Booking Logger
+        document.addEventListener('click', function(e) {
+            const target = e.target.closest('.booking-link');
+            if (target) {
+                const historyId = target.getAttribute('data-history-id');
+                const selectedMode = target.getAttribute('data-mode');
+                if (historyId && selectedMode) {
+                    fetch('/log-booking', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            history_id: historyId,
+                            selected_mode: selectedMode
+                        })
+                    }).then(r => r.json())
+                      .then(d => console.log('Logged booking choice:', d))
+                      .catch(err => console.error('Booking logging failed:', err));
+                }
+            }
+        });
+        // Post-Search Survey AJAX Submission Handler
+        function submitSurvey(mode) {
+            const historyId = "{{ history_id }}";
+            if (!historyId || !mode) return;
+            
+            fetch('/log-booking', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    history_id: historyId,
+                    selected_mode: mode
+                })
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    const panel = document.getElementById('surveyPanel');
+                    if (panel) {
+                        panel.style.transition = 'all 0.5s ease';
+                        panel.style.opacity = '0';
+                        panel.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            panel.style.display = 'none';
+                        }, 500);
+                        
+                        var successMsg = document.getElementById('successMsg');
+                        if (!successMsg) {
+                            successMsg = document.createElement('div');
+                            successMsg.className = 'success-message show';
+                            successMsg.id = 'successMsg';
+                            document.querySelector('.content').insertBefore(successMsg, document.querySelector('form'));
+                        }
+                        successMsg.innerHTML = '✨ Preference saved! Recommendations updated.';
+                        successMsg.classList.add('show');
+                        setTimeout(() => { successMsg.classList.remove('show'); }, 4000);
+                    }
+                }
+            })
+            .catch(err => {
+                console.error('Survey submission failed:', err);
+                showError('Failed to save survey preference.');
+            });
+        }
     </script>
 </body>
 </html>

@@ -28,6 +28,13 @@ def get_buses(source, dest, date, dist_km=0):
                 print(f"[Bus Service Warning] Could not calculate distance for dynamic fallback: {e}")
 
     # ==============================
+    # DATASET SEARCH
+    # ==============================
+    dataset_buses = _check_dataset(source, dest, date)
+    if dataset_buses:
+        return dataset_buses
+
+    # ==============================
     # HARDCODED ROUTE (FAST RESPONSE)
     # ==============================
     if source == "Indore" and dest == "Bhopal":
@@ -70,6 +77,30 @@ def get_buses(source, dest, date, dist_km=0):
 # ==================================================
 # INTERNAL HELPERS (PRIVATE FUNCTIONS)
 # ==================================================
+
+def _check_dataset(source, dest, date):
+    dataset_file = "bus_schedules.csv"
+    if not os.path.exists(dataset_file):
+        return None
+    try:
+        s_clean = source.split(',')[0].strip().lower()
+        d_clean = dest.split(',')[0].strip().lower()
+        
+        df = pd.read_csv(dataset_file)
+        matching = df[
+            (df["source"].str.lower() == s_clean) &
+            (df["destination"].str.lower() == d_clean)
+        ]
+        if not matching.empty:
+            records = matching.to_dict("records")
+            for r in records:
+                r["date"] = date
+                r["link"] = f"https://www.redbus.in/bus-tickets/{s_clean}-to-{d_clean}?date={date}"
+            return records
+    except Exception as e:
+        print(f"[Bus Service Warning] Dataset check failed: {e}")
+    return None
+
 
 def _check_cache(source, dest, date):
 

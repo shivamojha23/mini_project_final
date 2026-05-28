@@ -14,3 +14,10 @@ class History(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     mode = db.Column(db.String(50))
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    # Recommendation System Extensions
+    source = db.Column(db.String(150))
+    destination = db.Column(db.String(150))
+    preference = db.Column(db.String(50))
+    selected_mode = db.Column(db.String(50), nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)

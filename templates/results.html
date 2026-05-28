@@ -625,7 +625,7 @@
                         </span>
                     </div>
                     <div style="margin-top: 12px; display: flex; justify-content: flex-end;">
-                        <a href="https://www.google.com/travel/flights?q=Flights%20to%20{{ to_airport.code }}%20from%20{{ from_airport.code }}%20on%20{{ date }}" target="_blank" style="font-size: 11px; color: var(--blue-neon); text-decoration: none; font-weight: 600; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; border: 1px solid var(--border-glow); padding: 3px 8px; border-radius: 4px; transition: var(--transition);" onclick="event.stopPropagation();">✈️ Book on Google Flights →</a>
+                        <a href="https://www.google.com/travel/flights?q=Flights%20to%20{{ to_airport.code }}%20from%20{{ from_airport.code }}%20on%20{{ date }}" target="_blank" class="booking-link" data-history-id="{{ history_id }}" data-mode="Flight" style="font-size: 11px; color: var(--blue-neon); text-decoration: none; font-weight: 600; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; border: 1px solid var(--border-glow); padding: 3px 8px; border-radius: 4px; transition: var(--transition);" onclick="event.stopPropagation();">✈️ Book on Google Flights →</a>
                     </div>
                 </div>
                 {% endfor %}
@@ -1056,6 +1056,29 @@ async function showMap(cardEl, idx) {
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         lucide.createIcons();
+        
+        // Travel Recommendation Booking Logger
+        document.addEventListener('click', function(e) {
+            const target = e.target.closest('.booking-link');
+            if (target) {
+                const historyId = target.getAttribute('data-history-id');
+                const selectedMode = target.getAttribute('data-mode');
+                if (historyId && selectedMode) {
+                    fetch('/log-booking', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            history_id: historyId,
+                            selected_mode: selectedMode
+                        })
+                    }).then(r => r.json())
+                      .then(d => console.log('Logged booking choice:', d))
+                      .catch(err => console.error('Booking logging failed:', err));
+                }
+            }
+        });
     });
 </script>
 </body>

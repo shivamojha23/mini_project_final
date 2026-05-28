@@ -307,7 +307,7 @@
                         {% endfor %}
                     </div>
                     <div style="margin-top: 14px; display: flex; justify-content: flex-end;">
-                        <a href="https://www.irctc.co.in/nget/train-search" target="_blank" style="font-size: 12px; color: var(--blue-neon); text-decoration: none; font-weight: 600; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; border: 1px solid var(--border-glow); padding: 4px 10px; border-radius: 4px; transition: var(--transition);" onclick="event.stopPropagation();">🚆 Book on IRCTC →</a>
+                        <a href="https://www.irctc.co.in/nget/train-search" target="_blank" class="booking-link" data-history-id="{{ history_id }}" data-mode="Train" style="font-size: 12px; color: var(--blue-neon); text-decoration: none; font-weight: 600; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; border: 1px solid var(--border-glow); padding: 4px 10px; border-radius: 4px; transition: var(--transition);" onclick="event.stopPropagation();">🚆 Book on IRCTC →</a>
                     </div>
                 </div>
                 {% endfor %}
@@ -515,6 +515,29 @@ function selectRoute(routeId) {
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         lucide.createIcons();
+        
+        // Travel Recommendation Booking Logger
+        document.addEventListener('click', function(e) {
+            const target = e.target.closest('.booking-link');
+            if (target) {
+                const historyId = target.getAttribute('data-history-id');
+                const selectedMode = target.getAttribute('data-mode');
+                if (historyId && selectedMode) {
+                    fetch('/log-booking', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            history_id: historyId,
+                            selected_mode: selectedMode
+                        })
+                    }).then(r => r.json())
+                      .then(d => console.log('Logged booking choice:', d))
+                      .catch(err => console.error('Booking logging failed:', err));
+                }
+            }
+        });
     });
 </script>
 </body>

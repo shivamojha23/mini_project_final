@@ -1,0 +1,457 @@
+operator,bus_type,depart,arrive,duration,price,rating,punctuality,source,destination,date,type,icon
+Verma Travels,Bharat Benz A/C Sleeper (2+1),08:30,12:24,3.9,421,4.5,74,Indore,Bhopal,,Bus,🚌
+NueGo,Bharat Benz A/C Sleeper (2+1),14:00,18:00,4.0,411,3.9,88,Indore,Bhopal,,Bus,🚌
+FreshBus,Volvo Multi-Axle A/C Sleeper (2+1),17:30,21:30,4.0,452,3.9,78,Indore,Bhopal,,Bus,🚌
+CGRTC,Volvo Multi-Axle A/C Sleeper (2+1),20:00,00:05,4.1,455,4.1,82,Indore,Bhopal,,Bus,🚌
+CGRTC,AC Seater (2+2),21:30,02:12,4.7,271,3.6,70,Indore,Bhopal,,Bus,🚌
+MPSRTC,Volvo Multi-Axle A/C Sleeper (2+1),22:45,02:45,4.0,512,3.8,77,Indore,Bhopal,,Bus,🚌
+Chartered Bus,Non-AC Seater (2+2),06:00,11:00,5.0,171,3.8,81,Bhopal,Indore,,Bus,🚌
+CGRTC,Volvo A/C Seater (2+2),08:30,12:54,4.4,362,4.3,73,Bhopal,Indore,,Bus,🚌
+FreshBus,Bharat Benz A/C Sleeper (2+1),11:15,15:09,3.9,442,3.7,81,Bhopal,Indore,,Bus,🚌
+NueGo,Premium A/C Sleeper (2+1),14:00,18:18,4.3,392,4.2,97,Bhopal,Indore,,Bus,🚌
+Verma Travels,Premium A/C Sleeper (2+1),17:30,21:42,4.2,399,4.2,83,Bhopal,Indore,,Bus,🚌
+NueGo,Premium A/C Sleeper (2+1),20:00,00:30,4.5,361,4.3,80,Bhopal,Indore,,Bus,🚌
+CGRTC,Non-AC Sleeper (2+1),21:30,02:24,4.9,240,3.5,77,Bhopal,Indore,,Bus,🚌
+CGRTC,Bharat Benz A/C Sleeper (2+1),22:45,02:33,3.8,431,4.5,94,Bhopal,Indore,,Bus,🚌
+Chartered Bus,Bharat Benz A/C Sleeper (2+1),08:30,19:48,11.3,1252,3.5,79,Indore,Mumbai,,Bus,🚌
+FreshBus,Premium A/C Sleeper (2+1),11:15,22:57,11.7,1087,4.7,88,Indore,Mumbai,,Bus,🚌
+CGRTC,Non-AC Seater (2+2),17:30,07:36,14.1,576,4.4,73,Indore,Mumbai,,Bus,🚌
+MPSRTC,Non-AC Sleeper (2+1),21:30,10:06,12.6,740,3.6,76,Indore,Mumbai,,Bus,🚌
+Intercity Travels,Premium A/C Sleeper (2+1),22:45,10:27,11.7,1188,4.7,74,Indore,Mumbai,,Bus,🚌
+NueGo,Volvo A/C Seater (2+2),06:00,16:42,10.7,1061,4.3,95,Mumbai,Indore,,Bus,🚌
+Eagle Travels,Premium A/C Sleeper (2+1),08:30,20:00,11.5,1057,3.7,88,Mumbai,Indore,,Bus,🚌
+Patel Travels,Bharat Benz A/C Sleeper (2+1),14:00,01:18,11.3,1244,3.7,97,Mumbai,Indore,,Bus,🚌
+GSRTC,Volvo A/C Seater (2+2),17:30,04:06,10.6,967,3.8,73,Mumbai,Indore,,Bus,🚌
+MSRTC,Non-AC Seater (2+2),20:00,09:24,13.4,504,4.2,76,Mumbai,Indore,,Bus,🚌
+MSRTC,AC Seater (2+2),21:30,09:36,12.1,797,4.4,78,Mumbai,Indore,,Bus,🚌
+Patel Travels,AC Seater (2+2),22:45,10:33,11.8,780,3.6,79,Mumbai,Indore,,Bus,🚌
+Verma Travels,Non-AC Sleeper (2+1),06:00,19:12,13.2,771,3.6,74,Indore,Pune,,Bus,🚌
+NueGo,Volvo Multi-Axle A/C Sleeper (2+1),08:30,19:06,10.6,1375,3.6,96,Indore,Pune,,Bus,🚌
+MPSRTC,Non-AC Sleeper (2+1),11:15,00:15,13.0,752,4.3,83,Indore,Pune,,Bus,🚌
+Chartered Bus,Volvo A/C Seater (2+2),17:30,04:12,10.7,1000,4.7,80,Indore,Pune,,Bus,🚌
+Verma Travels,Volvo Multi-Axle A/C Sleeper (2+1),20:00,07:00,11.0,1405,4.8,93,Indore,Pune,,Bus,🚌
+Verma Travels,Volvo Multi-Axle A/C Sleeper (2+1),22:45,09:45,11.0,1482,4.2,83,Indore,Pune,,Bus,🚌
+GSRTC,Volvo A/C Seater (2+2),06:00,16:24,10.4,1097,4.5,77,Pune,Indore,,Bus,🚌
+Neeta Travels,Non-AC Seater (2+2),08:30,22:00,13.5,538,3.6,70,Pune,Indore,,Bus,🚌
+Neeta Travels,Bharat Benz A/C Sleeper (2+1),11:15,22:39,11.4,1371,4.3,94,Pune,Indore,,Bus,🚌
+Eagle Travels,Volvo A/C Seater (2+2),14:00,00:42,10.7,1107,4.5,82,Pune,Indore,,Bus,🚌
+Patel Travels,AC Seater (2+2),17:30,05:12,11.7,823,4.5,91,Pune,Indore,,Bus,🚌
+Patel Travels,Non-AC Sleeper (2+1),20:00,08:54,12.9,694,3.9,75,Pune,Indore,,Bus,🚌
+Dolphin Travel House,Non-AC Sleeper (2+1),21:30,10:54,13.4,744,4.7,79,Pune,Indore,,Bus,🚌
+Neeta Travels,Volvo Multi-Axle A/C Sleeper (2+1),22:45,09:03,10.3,1392,3.6,84,Pune,Indore,,Bus,🚌
+Chartered Bus,Volvo Multi-Axle A/C Sleeper (2+1),14:00,20:06,6.1,857,4.1,92,Bhopal,Nagpur,,Bus,🚌
+Verma Travels,Non-AC Seater (2+2),17:30,02:12,8.7,329,3.8,97,Bhopal,Nagpur,,Bus,🚌
+MPSRTC,Non-AC Seater (2+2),20:00,04:30,8.5,315,3.7,95,Bhopal,Nagpur,,Bus,🚌
+FreshBus,Volvo A/C Seater (2+2),21:30,04:24,6.9,651,4.5,76,Bhopal,Nagpur,,Bus,🚌
+Verma Travels,AC Seater (2+2),22:45,05:45,7.0,535,4.4,70,Bhopal,Nagpur,,Bus,🚌
+MPSRTC,AC Seater (2+2),06:00,13:42,7.7,519,3.7,98,Nagpur,Bhopal,,Bus,🚌
+Verma Travels,Bharat Benz A/C Sleeper (2+1),11:15,18:39,7.4,770,3.8,79,Nagpur,Bhopal,,Bus,🚌
+Verma Travels,Volvo A/C Seater (2+2),14:00,20:48,6.8,642,3.7,92,Nagpur,Bhopal,,Bus,🚌
+MPSRTC,Bharat Benz A/C Sleeper (2+1),17:30,01:00,7.5,759,4.5,81,Nagpur,Bhopal,,Bus,🚌
+NueGo,Volvo A/C Seater (2+2),20:00,02:48,6.8,644,4.2,88,Nagpur,Bhopal,,Bus,🚌
+CGRTC,Premium A/C Sleeper (2+1),22:45,05:33,6.8,639,4.0,71,Nagpur,Bhopal,,Bus,🚌
+Intercity Travels,Volvo A/C Seater (2+2),06:00,12:24,6.4,575,4.0,91,Bhopal,Jabalpur,,Bus,🚌
+Hans Travels,Premium A/C Sleeper (2+1),08:30,14:36,6.1,653,3.8,92,Bhopal,Jabalpur,,Bus,🚌
+Chartered Bus,Non-AC Sleeper (2+1),14:00,20:54,6.9,382,3.6,98,Bhopal,Jabalpur,,Bus,🚌
+MPSRTC,Premium A/C Sleeper (2+1),17:30,00:30,7.0,634,4.6,93,Bhopal,Jabalpur,,Bus,🚌
+Intercity Travels,Volvo Multi-Axle A/C Sleeper (2+1),21:30,03:36,6.1,781,4.8,86,Bhopal,Jabalpur,,Bus,🚌
+MPSRTC,Non-AC Seater (2+2),22:45,06:21,7.6,281,4.6,80,Bhopal,Jabalpur,,Bus,🚌
+Hans Travels,Premium A/C Sleeper (2+1),08:30,14:48,6.3,667,3.9,96,Jabalpur,Bhopal,,Bus,🚌
+MPSRTC,Non-AC Seater (2+2),11:15,18:33,7.3,315,4.0,93,Jabalpur,Bhopal,,Bus,🚌
+MPSRTC,Bharat Benz A/C Sleeper (2+1),20:00,02:18,6.3,734,4.5,75,Jabalpur,Bhopal,,Bus,🚌
+Verma Travels,Bharat Benz A/C Sleeper (2+1),21:30,03:48,6.3,679,4.0,87,Jabalpur,Bhopal,,Bus,🚌
+MPSRTC,Bharat Benz A/C Sleeper (2+1),22:45,05:33,6.8,672,4.6,90,Jabalpur,Bhopal,,Bus,🚌
+Intercity Travels,Non-AC Sleeper (2+1),06:00,15:30,9.5,513,4.3,72,Gwalior,Bhopal,,Bus,🚌
+Hans Travels,Volvo A/C Seater (2+2),08:30,16:41,8.2,698,4.7,92,Gwalior,Bhopal,,Bus,🚌
+Intercity Travels,Non-AC Seater (2+2),11:15,21:03,9.8,366,4.3,88,Gwalior,Bhopal,,Bus,🚌
+Chartered Bus,Non-AC Seater (2+2),14:00,00:24,10.4,403,3.5,95,Gwalior,Bhopal,,Bus,🚌
+Hans Travels,Non-AC Seater (2+2),20:00,05:54,9.9,400,4.7,92,Gwalior,Bhopal,,Bus,🚌
+Chartered Bus,Volvo Multi-Axle A/C Sleeper (2+1),21:30,05:36,8.1,980,4.3,97,Gwalior,Bhopal,,Bus,🚌
+CGRTC,AC Seater (2+2),22:45,07:57,9.2,606,4.0,86,Gwalior,Bhopal,,Bus,🚌
+Verma Travels,Volvo A/C Seater (2+2),06:00,13:54,7.9,679,4.7,79,Bhopal,Gwalior,,Bus,🚌
+CGRTC,Non-AC Sleeper (2+1),08:30,17:42,9.2,541,4.8,71,Bhopal,Gwalior,,Bus,🚌
+Verma Travels,Non-AC Sleeper (2+1),11:15,21:09,9.9,497,4.2,71,Bhopal,Gwalior,,Bus,🚌
+NueGo,Premium A/C Sleeper (2+1),20:00,04:30,8.5,841,3.8,71,Bhopal,Gwalior,,Bus,🚌
+Hans Travels,Volvo A/C Seater (2+2),21:30,05:24,7.9,689,3.9,79,Bhopal,Gwalior,,Bus,🚌
+MPSRTC,Premium A/C Sleeper (2+1),22:45,07:15,8.5,854,4.4,97,Bhopal,Gwalior,,Bus,🚌
+MPSRTC,Non-AC Sleeper (2+1),06:00,08:18,2.3,150,4.2,97,Indore,Ujjain,,Bus,🚌
+NueGo,Volvo A/C Seater (2+2),08:30,09:42,1.2,150,4.0,96,Indore,Ujjain,,Bus,🚌
+FreshBus,Volvo A/C Seater (2+2),11:15,12:33,1.3,150,3.7,97,Indore,Ujjain,,Bus,🚌
+CGRTC,Premium A/C Sleeper (2+1),14:00,16:00,2.0,150,4.4,83,Indore,Ujjain,,Bus,🚌
+Hans Travels,AC Seater (2+2),17:30,19:30,2.0,150,4.3,94,Indore,Ujjain,,Bus,🚌
+NueGo,Premium A/C Sleeper (2+1),20:00,21:18,1.3,150,4.4,98,Indore,Ujjain,,Bus,🚌
+Verma Travels,Volvo A/C Seater (2+2),21:30,23:18,1.8,150,3.6,98,Indore,Ujjain,,Bus,🚌
+CGRTC,Bharat Benz A/C Sleeper (2+1),08:30,10:30,2.0,150,4.1,97,Ujjain,Indore,,Bus,🚌
+Hans Travels,Non-AC Sleeper (2+1),11:15,13:21,2.1,150,4.0,84,Ujjain,Indore,,Bus,🚌
+Intercity Travels,Volvo A/C Seater (2+2),17:30,18:42,1.2,150,4.7,98,Ujjain,Indore,,Bus,🚌
+Chartered Bus,AC Seater (2+2),20:00,22:12,2.2,150,3.8,71,Ujjain,Indore,,Bus,🚌
+Verma Travels,Premium A/C Sleeper (2+1),22:45,00:45,2.0,150,3.7,84,Ujjain,Indore,,Bus,🚌
+Patel Travels,Non-AC Seater (2+2),06:00,09:48,3.8,150,3.6,70,Mumbai,Pune,,Bus,🚌
+FreshBus,Volvo A/C Seater (2+2),08:30,11:30,3.0,261,3.9,72,Mumbai,Pune,,Bus,🚌
+Neeta Travels,Premium A/C Sleeper (2+1),11:15,15:03,3.8,277,4.2,83,Mumbai,Pune,,Bus,🚌
+NueGo,Volvo A/C Seater (2+2),17:30,21:06,3.6,265,4.7,81,Mumbai,Pune,,Bus,🚌
+Patel Travels,Volvo Multi-Axle A/C Sleeper (2+1),20:00,23:30,3.5,365,4.6,77,Mumbai,Pune,,Bus,🚌
+Neeta Travels,AC Seater (2+2),21:30,01:12,3.7,224,3.8,87,Mumbai,Pune,,Bus,🚌
+GSRTC,Non-AC Sleeper (2+1),22:45,02:57,4.2,176,4.4,93,Mumbai,Pune,,Bus,🚌
+GSRTC,Volvo A/C Seater (2+2),06:00,08:48,2.8,267,4.1,77,Pune,Mumbai,,Bus,🚌
+MSRTC,Premium A/C Sleeper (2+1),08:30,11:30,3.0,300,4.6,89,Pune,Mumbai,,Bus,🚌
+GSRTC,Volvo Multi-Axle A/C Sleeper (2+1),11:15,14:15,3.0,357,3.7,82,Pune,Mumbai,,Bus,🚌
+NueGo,Volvo Multi-Axle A/C Sleeper (2+1),21:30,00:18,2.8,371,3.6,80,Pune,Mumbai,,Bus,🚌
+FreshBus,Bharat Benz A/C Sleeper (2+1),22:45,01:51,3.1,325,3.7,84,Pune,Mumbai,,Bus,🚌
+NueGo,Volvo Multi-Axle A/C Sleeper (2+1),06:00,16:24,10.4,1438,3.9,74,Mumbai,Goa,,Bus,🚌
+Eagle Travels,AC Seater (2+2),08:30,20:06,11.6,839,4.6,70,Mumbai,Goa,,Bus,🚌
+Neeta Travels,AC Seater (2+2),11:15,22:45,11.5,779,4.2,71,Mumbai,Goa,,Bus,🚌
+Patel Travels,Volvo A/C Seater (2+2),14:00,00:24,10.4,1051,4.1,83,Mumbai,Goa,,Bus,🚌
+Patel Travels,AC Seater (2+2),20:00,08:00,12.0,784,4.4,75,Mumbai,Goa,,Bus,🚌
+Patel Travels,Premium A/C Sleeper (2+1),22:45,09:57,11.2,1130,4.2,77,Mumbai,Goa,,Bus,🚌
+Neeta Travels,Premium A/C Sleeper (2+1),08:30,19:12,10.7,1208,3.8,78,Goa,Mumbai,,Bus,🚌
+Neeta Travels,Volvo Multi-Axle A/C Sleeper (2+1),11:15,21:51,10.6,1474,4.7,90,Goa,Mumbai,,Bus,🚌
+GSRTC,Volvo Multi-Axle A/C Sleeper (2+1),14:00,00:12,10.2,1343,4.0,83,Goa,Mumbai,,Bus,🚌
+Patel Travels,Premium A/C Sleeper (2+1),17:30,04:54,11.4,1083,3.9,83,Goa,Mumbai,,Bus,🚌
+NueGo,Volvo A/C Seater (2+2),20:00,06:00,10.0,1058,3.6,84,Goa,Mumbai,,Bus,🚌
+GSRTC,Volvo Multi-Axle A/C Sleeper (2+1),21:30,08:12,10.7,1498,4.2,75,Goa,Mumbai,,Bus,🚌
+GSRTC,Non-AC Seater (2+2),06:00,16:06,10.1,413,3.6,72,Pune,Goa,,Bus,🚌
+Neeta Travels,Non-AC Seater (2+2),08:30,18:54,10.4,401,4.6,86,Pune,Goa,,Bus,🚌
+Eagle Travels,Premium A/C Sleeper (2+1),14:00,23:00,9.0,821,3.9,78,Pune,Goa,,Bus,🚌
+Eagle Travels,Non-AC Seater (2+2),17:30,03:30,10.0,378,4.8,74,Pune,Goa,,Bus,🚌
+Eagle Travels,Premium A/C Sleeper (2+1),20:00,04:42,8.7,818,4.1,71,Pune,Goa,,Bus,🚌
+GSRTC,AC Seater (2+2),21:30,06:54,9.4,672,4.0,79,Pune,Goa,,Bus,🚌
+FreshBus,Volvo A/C Seater (2+2),22:45,06:56,8.2,740,3.6,78,Pune,Goa,,Bus,🚌
+MSRTC,Non-AC Sleeper (2+1),11:15,20:39,9.4,543,4.5,89,Goa,Pune,,Bus,🚌
+Patel Travels,Volvo A/C Seater (2+2),17:30,01:41,8.2,818,4.1,93,Goa,Pune,,Bus,🚌
+Dolphin Travel House,Bharat Benz A/C Sleeper (2+1),20:00,05:06,9.1,931,3.7,97,Goa,Pune,,Bus,🚌
+Patel Travels,Premium A/C Sleeper (2+1),21:30,06:00,8.5,802,4.1,98,Goa,Pune,,Bus,🚌
+Eagle Travels,Non-AC Sleeper (2+1),22:45,08:09,9.4,549,4.1,85,Goa,Pune,,Bus,🚌
+Neeta Travels,Non-AC Sleeper (2+1),08:30,19:48,11.3,673,4.2,79,Mumbai,Ahmedabad,,Bus,🚌
+Eagle Travels,AC Seater (2+2),11:15,21:51,10.6,757,3.7,75,Mumbai,Ahmedabad,,Bus,🚌
+MSRTC,Non-AC Seater (2+2),14:00,02:42,12.7,465,4.0,96,Mumbai,Ahmedabad,,Bus,🚌
+FreshBus,Premium A/C Sleeper (2+1),17:30,04:06,10.6,1035,4.3,74,Mumbai,Ahmedabad,,Bus,🚌
+GSRTC,Volvo A/C Seater (2+2),20:00,05:06,9.1,979,3.8,88,Mumbai,Ahmedabad,,Bus,🚌
+MSRTC,Bharat Benz A/C Sleeper (2+1),21:30,07:36,10.1,1184,4.5,85,Mumbai,Ahmedabad,,Bus,🚌
+Eagle Travels,Premium A/C Sleeper (2+1),22:45,08:33,9.8,1044,4.1,90,Mumbai,Ahmedabad,,Bus,🚌
+Eagle Travels,Volvo A/C Seater (2+2),06:00,15:54,9.9,926,4.5,72,Ahmedabad,Mumbai,,Bus,🚌
+FreshBus,Volvo A/C Seater (2+2),08:30,18:30,10.0,957,3.6,79,Ahmedabad,Mumbai,,Bus,🚌
+Dolphin Travel House,Non-AC Sleeper (2+1),11:15,22:33,11.3,602,4.3,85,Ahmedabad,Mumbai,,Bus,🚌
+Patel Travels,AC Seater (2+2),17:30,04:00,10.5,762,4.5,71,Ahmedabad,Mumbai,,Bus,🚌
+GSRTC,AC Seater (2+2),20:00,06:18,10.3,745,4.1,85,Ahmedabad,Mumbai,,Bus,🚌
+FreshBus,Volvo A/C Seater (2+2),22:45,07:51,9.1,892,4.6,96,Ahmedabad,Mumbai,,Bus,🚌
+Dolphin Travel House,AC Seater (2+2),06:00,10:48,4.8,317,3.5,76,Ahmedabad,Rajkot,,Bus,🚌
+GSRTC,Bharat Benz A/C Sleeper (2+1),08:30,13:06,4.6,456,3.6,93,Ahmedabad,Rajkot,,Bus,🚌
+Patel Travels,Bharat Benz A/C Sleeper (2+1),11:15,16:21,5.1,518,4.4,72,Ahmedabad,Rajkot,,Bus,🚌
+Dolphin Travel House,Premium A/C Sleeper (2+1),14:00,18:24,4.4,416,4.7,96,Ahmedabad,Rajkot,,Bus,🚌
+Dolphin Travel House,Non-AC Sleeper (2+1),17:30,22:24,4.9,288,3.9,98,Ahmedabad,Rajkot,,Bus,🚌
+GSRTC,Premium A/C Sleeper (2+1),21:30,02:12,4.7,445,3.7,78,Ahmedabad,Rajkot,,Bus,🚌
+Dolphin Travel House,Non-AC Sleeper (2+1),22:45,04:33,5.8,269,3.6,80,Ahmedabad,Rajkot,,Bus,🚌
+GSRTC,AC Seater (2+2),08:30,13:36,5.1,326,4.5,74,Rajkot,Ahmedabad,,Bus,🚌
+Patel Travels,Volvo Multi-Axle A/C Sleeper (2+1),11:15,15:57,4.7,589,3.8,70,Rajkot,Ahmedabad,,Bus,🚌
+Patel Travels,Bharat Benz A/C Sleeper (2+1),14:00,18:48,4.8,455,4.4,75,Rajkot,Ahmedabad,,Bus,🚌
+NueGo,Volvo A/C Seater (2+2),20:00,00:54,4.9,393,3.8,84,Rajkot,Ahmedabad,,Bus,🚌
+GSRTC,Non-AC Sleeper (2+1),21:30,03:06,5.6,275,3.5,78,Rajkot,Ahmedabad,,Bus,🚌
+FreshBus,Volvo Multi-Axle A/C Sleeper (2+1),22:45,02:57,4.2,514,3.7,82,Rajkot,Ahmedabad,,Bus,🚌
+GSRTC,Non-AC Sleeper (2+1),06:00,12:00,6.0,325,3.9,84,Ahmedabad,Udaipur,,Bus,🚌
+Dolphin Travel House,Non-AC Sleeper (2+1),11:15,16:57,5.7,317,3.6,78,Ahmedabad,Udaipur,,Bus,🚌
+Patel Travels,AC Seater (2+2),14:00,19:48,5.8,350,4.6,83,Ahmedabad,Udaipur,,Bus,🚌
+MSRTC,Volvo Multi-Axle A/C Sleeper (2+1),17:30,22:48,5.3,642,4.5,97,Ahmedabad,Udaipur,,Bus,🚌
+Eagle Travels,AC Seater (2+2),20:00,02:12,6.2,366,3.6,94,Ahmedabad,Udaipur,,Bus,🚌
+NueGo,Premium A/C Sleeper (2+1),21:30,03:18,5.8,541,4.4,90,Ahmedabad,Udaipur,,Bus,🚌
+Patel Travels,Premium A/C Sleeper (2+1),22:45,04:33,5.8,530,4.6,76,Ahmedabad,Udaipur,,Bus,🚌
+MSRTC,Non-AC Seater (2+2),06:00,12:12,6.2,235,4.6,94,Udaipur,Ahmedabad,,Bus,🚌
+MSRTC,Volvo Multi-Axle A/C Sleeper (2+1),08:30,13:54,5.4,612,4.3,91,Udaipur,Ahmedabad,,Bus,🚌
+Neeta Travels,Bharat Benz A/C Sleeper (2+1),11:15,17:09,5.9,526,4.3,92,Udaipur,Ahmedabad,,Bus,🚌
+NueGo,Volvo Multi-Axle A/C Sleeper (2+1),14:00,19:06,5.1,598,4.3,89,Udaipur,Ahmedabad,,Bus,🚌
+Patel Travels,Volvo A/C Seater (2+2),17:30,22:36,5.1,428,3.6,98,Udaipur,Ahmedabad,,Bus,🚌
+Patel Travels,Non-AC Sleeper (2+1),20:00,01:36,5.6,303,4.0,73,Udaipur,Ahmedabad,,Bus,🚌
+NueGo,Bharat Benz A/C Sleeper (2+1),21:30,02:24,4.9,542,4.0,76,Udaipur,Ahmedabad,,Bus,🚌
+Eagle Travels,Volvo A/C Seater (2+2),22:45,03:27,4.7,423,4.7,86,Udaipur,Ahmedabad,,Bus,🚌
+Patel Travels,Volvo Multi-Axle A/C Sleeper (2+1),08:30,13:36,5.1,710,3.7,75,Surat,Mumbai,,Bus,🚌
+GSRTC,Bharat Benz A/C Sleeper (2+1),14:00,19:18,5.3,583,4.5,75,Surat,Mumbai,,Bus,🚌
+MSRTC,Non-AC Sleeper (2+1),17:30,00:30,7.0,347,4.0,72,Surat,Mumbai,,Bus,🚌
+Neeta Travels,Bharat Benz A/C Sleeper (2+1),20:00,01:30,5.5,607,4.5,75,Surat,Mumbai,,Bus,🚌
+GSRTC,Premium A/C Sleeper (2+1),22:45,04:27,5.7,580,4.5,80,Surat,Mumbai,,Bus,🚌
+Neeta Travels,Volvo A/C Seater (2+2),08:30,13:42,5.2,467,4.3,97,Mumbai,Surat,,Bus,🚌
+GSRTC,Volvo A/C Seater (2+2),14:00,19:06,5.1,478,3.8,72,Mumbai,Surat,,Bus,🚌
+Patel Travels,Volvo Multi-Axle A/C Sleeper (2+1),17:30,22:42,5.2,676,4.6,96,Mumbai,Surat,,Bus,🚌
+Eagle Travels,Volvo Multi-Axle A/C Sleeper (2+1),20:00,01:00,5.0,670,3.6,92,Mumbai,Surat,,Bus,🚌
+Patel Travels,Bharat Benz A/C Sleeper (2+1),21:30,03:48,6.3,588,4.6,95,Mumbai,Surat,,Bus,🚌
+GSRTC,AC Seater (2+2),22:45,04:45,6.0,397,4.3,83,Mumbai,Surat,,Bus,🚌
+Eagle Travels,Non-AC Sleeper (2+1),06:00,08:48,2.8,150,4.0,88,Vadodara,Ahmedabad,,Bus,🚌
+Neeta Travels,Non-AC Seater (2+2),11:15,14:51,3.6,150,3.7,77,Vadodara,Ahmedabad,,Bus,🚌
+Dolphin Travel House,Volvo A/C Seater (2+2),14:00,17:06,3.1,203,3.5,74,Vadodara,Ahmedabad,,Bus,🚌
+MSRTC,AC Seater (2+2),17:30,20:12,2.7,158,4.2,86,Vadodara,Ahmedabad,,Bus,🚌
+Eagle Travels,Premium A/C Sleeper (2+1),21:30,00:48,3.3,235,4.5,72,Vadodara,Ahmedabad,,Bus,🚌
+MSRTC,Non-AC Sleeper (2+1),22:45,02:09,3.4,150,4.2,94,Vadodara,Ahmedabad,,Bus,🚌
+Dolphin Travel House,AC Seater (2+2),06:00,09:00,3.0,166,3.5,72,Ahmedabad,Vadodara,,Bus,🚌
+NueGo,Premium A/C Sleeper (2+1),08:30,10:54,2.4,234,4.1,72,Ahmedabad,Vadodara,,Bus,🚌
+GSRTC,Volvo Multi-Axle A/C Sleeper (2+1),11:15,13:27,2.2,282,4.1,92,Ahmedabad,Vadodara,,Bus,🚌
+MSRTC,Volvo A/C Seater (2+2),14:00,16:30,2.5,198,3.5,78,Ahmedabad,Vadodara,,Bus,🚌
+Eagle Travels,Volvo Multi-Axle A/C Sleeper (2+1),17:30,19:48,2.3,299,4.8,96,Ahmedabad,Vadodara,,Bus,🚌
+Eagle Travels,Bharat Benz A/C Sleeper (2+1),20:00,23:06,3.1,257,3.6,75,Ahmedabad,Vadodara,,Bus,🚌
+GSRTC,Bharat Benz A/C Sleeper (2+1),21:30,00:30,3.0,253,4.6,74,Ahmedabad,Vadodara,,Bus,🚌
+Dolphin Travel House,Premium A/C Sleeper (2+1),22:45,01:39,2.9,225,3.9,74,Ahmedabad,Vadodara,,Bus,🚌
+Laxmi Holidays,AC Seater (2+2),06:00,11:54,5.9,392,4.3,83,Delhi,Jaipur,,Bus,🚌
+Shrinath Travels,Volvo Multi-Axle A/C Sleeper (2+1),08:30,14:12,5.7,700,4.0,84,Delhi,Jaipur,,Bus,🚌
+Laxmi Holidays,Non-AC Sleeper (2+1),11:15,17:21,6.1,356,4.1,96,Delhi,Jaipur,,Bus,🚌
+NueGo,Bharat Benz A/C Sleeper (2+1),14:00,19:06,5.1,595,4.7,76,Delhi,Jaipur,,Bus,🚌
+Indo Canadian Transport Co.,Non-AC Sleeper (2+1),17:30,23:24,5.9,335,4.4,97,Delhi,Jaipur,,Bus,🚌
+Laxmi Holidays,Non-AC Sleeper (2+1),20:00,02:12,6.2,333,4.1,82,Delhi,Jaipur,,Bus,🚌
+NueGo,Volvo Multi-Axle A/C Sleeper (2+1),21:30,02:48,5.3,631,4.5,89,Delhi,Jaipur,,Bus,🚌
+FreshBus,Volvo A/C Seater (2+2),22:45,04:09,5.4,446,4.5,96,Delhi,Jaipur,,Bus,🚌
+UPSRTC,Volvo A/C Seater (2+2),06:00,11:36,5.6,438,3.9,98,Jaipur,Delhi,,Bus,🚌
+Indo Canadian Transport Co.,AC Seater (2+2),08:30,14:36,6.1,396,4.0,92,Jaipur,Delhi,,Bus,🚌
+Indo Canadian Transport Co.,Non-AC Seater (2+2),11:15,18:15,7.0,242,4.4,86,Jaipur,Delhi,,Bus,🚌
+Indo Canadian Transport Co.,AC Seater (2+2),14:00,19:42,5.7,413,4.4,82,Jaipur,Delhi,,Bus,🚌
+FreshBus,Volvo A/C Seater (2+2),17:30,22:54,5.4,469,4.2,78,Jaipur,Delhi,,Bus,🚌
+FreshBus,Bharat Benz A/C Sleeper (2+1),20:00,01:30,5.5,620,3.9,74,Jaipur,Delhi,,Bus,🚌
+Shrinath Travels,Premium A/C Sleeper (2+1),22:45,04:39,5.9,535,4.5,96,Jaipur,Delhi,,Bus,🚌
+HRTC,Volvo A/C Seater (2+2),08:30,13:18,4.8,420,4.2,94,Delhi,Dehradun,,Bus,🚌
+Zingbus,AC Seater (2+2),11:15,16:15,5.0,333,4.6,95,Delhi,Dehradun,,Bus,🚌
+HRTC,Premium A/C Sleeper (2+1),14:00,19:00,5.0,472,3.9,90,Delhi,Dehradun,,Bus,🚌
+UPSRTC,Non-AC Sleeper (2+1),17:30,23:30,6.0,306,3.8,84,Delhi,Dehradun,,Bus,🚌
+HRTC,Premium A/C Sleeper (2+1),20:00,01:06,5.1,506,4.1,77,Delhi,Dehradun,,Bus,🚌
+Laxmi Holidays,Non-AC Sleeper (2+1),22:45,04:45,6.0,306,4.5,73,Delhi,Dehradun,,Bus,🚌
+Laxmi Holidays,Non-AC Sleeper (2+1),06:00,12:00,6.0,288,4.1,80,Dehradun,Delhi,,Bus,🚌
+Zingbus,AC Seater (2+2),08:30,14:00,5.5,335,4.3,81,Dehradun,Delhi,,Bus,🚌
+Indo Canadian Transport Co.,Non-AC Sleeper (2+1),11:15,16:39,5.4,310,4.4,71,Dehradun,Delhi,,Bus,🚌
+NueGo,Volvo A/C Seater (2+2),14:00,19:00,5.0,423,4.7,82,Dehradun,Delhi,,Bus,🚌
+Indo Canadian Transport Co.,Bharat Benz A/C Sleeper (2+1),17:30,23:12,5.7,549,4.0,97,Dehradun,Delhi,,Bus,🚌
+UPSRTC,Non-AC Seater (2+2),20:00,02:12,6.2,227,4.1,82,Dehradun,Delhi,,Bus,🚌
+HRTC,Volvo A/C Seater (2+2),21:30,02:06,4.6,450,4.7,95,Dehradun,Delhi,,Bus,🚌
+Shrinath Travels,Bharat Benz A/C Sleeper (2+1),22:45,04:21,5.6,564,4.5,91,Dehradun,Delhi,,Bus,🚌
+FreshBus,Bharat Benz A/C Sleeper (2+1),08:30,18:06,9.6,957,3.8,96,Delhi,Amritsar,,Bus,🚌
+NueGo,Volvo Multi-Axle A/C Sleeper (2+1),11:15,19:21,8.1,1189,4.3,86,Delhi,Amritsar,,Bus,🚌
+HRTC,Non-AC Seater (2+2),14:00,01:24,11.4,402,4.2,96,Delhi,Amritsar,,Bus,🚌
+RSRTC,Bharat Benz A/C Sleeper (2+1),17:30,02:12,8.7,1019,4.2,94,Delhi,Amritsar,,Bus,🚌
+NueGo,Volvo Multi-Axle A/C Sleeper (2+1),20:00,04:24,8.4,1098,4.0,97,Delhi,Amritsar,,Bus,🚌
+Shrinath Travels,Non-AC Sleeper (2+1),21:30,08:00,10.5,546,4.3,87,Delhi,Amritsar,,Bus,🚌
+Laxmi Holidays,Volvo A/C Seater (2+2),06:00,14:06,8.1,801,4.5,91,Amritsar,Delhi,,Bus,🚌
+RSRTC,Non-AC Sleeper (2+1),11:15,21:27,10.2,598,4.8,91,Amritsar,Delhi,,Bus,🚌
+FreshBus,Volvo Multi-Axle A/C Sleeper (2+1),14:00,22:06,8.1,1096,4.2,80,Amritsar,Delhi,,Bus,🚌
+Laxmi Holidays,Premium A/C Sleeper (2+1),17:30,03:06,9.6,912,3.6,95,Amritsar,Delhi,,Bus,🚌
+Laxmi Holidays,AC Seater (2+2),21:30,07:06,9.6,703,4.3,82,Amritsar,Delhi,,Bus,🚌
+Shrinath Travels,Bharat Benz A/C Sleeper (2+1),22:45,07:33,8.8,960,4.5,97,Amritsar,Delhi,,Bus,🚌
+HRTC,Non-AC Seater (2+2),06:00,18:42,12.7,472,4.0,87,Delhi,Lucknow,,Bus,🚌
+Indo Canadian Transport Co.,Volvo A/C Seater (2+2),08:30,18:12,9.7,944,4.5,77,Delhi,Lucknow,,Bus,🚌
+RSRTC,Bharat Benz A/C Sleeper (2+1),11:15,21:33,10.3,1153,4.0,77,Delhi,Lucknow,,Bus,🚌
+RSRTC,Bharat Benz A/C Sleeper (2+1),14:00,00:30,10.5,1220,4.3,82,Delhi,Lucknow,,Bus,🚌
+Shrinath Travels,Non-AC Seater (2+2),17:30,05:42,12.2,503,4.6,92,Delhi,Lucknow,,Bus,🚌
+HRTC,Bharat Benz A/C Sleeper (2+1),20:00,06:24,10.4,1100,4.7,94,Delhi,Lucknow,,Bus,🚌
+Shrinath Travels,Non-AC Sleeper (2+1),21:30,09:00,11.5,663,4.8,96,Delhi,Lucknow,,Bus,🚌
+RSRTC,Premium A/C Sleeper (2+1),22:45,09:21,10.6,1009,3.8,87,Delhi,Lucknow,,Bus,🚌
+RSRTC,Bharat Benz A/C Sleeper (2+1),06:00,16:06,10.1,1194,4.0,83,Lucknow,Delhi,,Bus,🚌
+Shrinath Travels,Non-AC Seater (2+2),08:30,21:00,12.5,517,4.7,76,Lucknow,Delhi,,Bus,🚌
+NueGo,Premium A/C Sleeper (2+1),11:15,21:33,10.3,1056,3.7,80,Lucknow,Delhi,,Bus,🚌
+Laxmi Holidays,Non-AC Sleeper (2+1),14:00,01:48,11.8,697,3.7,87,Lucknow,Delhi,,Bus,🚌
+Zingbus,AC Seater (2+2),17:30,04:36,11.1,708,3.7,78,Lucknow,Delhi,,Bus,🚌
+FreshBus,Bharat Benz A/C Sleeper (2+1),20:00,06:18,10.3,1078,4.5,78,Lucknow,Delhi,,Bus,🚌
+Zingbus,Non-AC Seater (2+2),21:30,09:36,12.1,513,4.4,77,Lucknow,Delhi,,Bus,🚌
+NueGo,Bharat Benz A/C Sleeper (2+1),22:45,08:51,10.1,1087,4.5,73,Lucknow,Delhi,,Bus,🚌
+FreshBus,Volvo A/C Seater (2+2),06:00,15:48,9.8,912,4.0,90,Delhi,Manali,,Bus,🚌
+HRTC,Volvo A/C Seater (2+2),08:30,17:54,9.4,900,4.2,75,Delhi,Manali,,Bus,🚌
+FreshBus,Bharat Benz A/C Sleeper (2+1),11:15,22:03,10.8,1105,4.4,82,Delhi,Manali,,Bus,🚌
+NueGo,Bharat Benz A/C Sleeper (2+1),17:30,04:00,10.5,1204,4.8,78,Delhi,Manali,,Bus,🚌
+Laxmi Holidays,Non-AC Sleeper (2+1),20:00,08:24,12.4,666,4.5,95,Delhi,Manali,,Bus,🚌
+NueGo,Premium A/C Sleeper (2+1),21:30,08:12,10.7,1032,4.3,77,Delhi,Manali,,Bus,🚌
+UPSRTC,Bharat Benz A/C Sleeper (2+1),06:00,16:42,10.7,1084,3.8,81,Manali,Delhi,,Bus,🚌
+NueGo,Premium A/C Sleeper (2+1),11:15,21:27,10.2,1077,3.9,81,Manali,Delhi,,Bus,🚌
+FreshBus,Bharat Benz A/C Sleeper (2+1),14:00,00:42,10.7,1200,4.1,93,Manali,Delhi,,Bus,🚌
+UPSRTC,Non-AC Sleeper (2+1),20:00,08:12,12.2,687,4.0,76,Manali,Delhi,,Bus,🚌
+Indo Canadian Transport Co.,Non-AC Seater (2+2),22:45,11:09,12.4,480,4.6,90,Manali,Delhi,,Bus,🚌
+Indo Canadian Transport Co.,Bharat Benz A/C Sleeper (2+1),06:00,13:30,7.5,734,4.8,86,Delhi,Shimla,,Bus,🚌
+RSRTC,Bharat Benz A/C Sleeper (2+1),08:30,15:54,7.4,689,4.6,91,Delhi,Shimla,,Bus,🚌
+Zingbus,Non-AC Sleeper (2+1),11:15,19:33,8.3,424,4.3,78,Delhi,Shimla,,Bus,🚌
+Shrinath Travels,Volvo Multi-Axle A/C Sleeper (2+1),14:00,20:06,6.1,846,3.8,77,Delhi,Shimla,,Bus,🚌
+RSRTC,Bharat Benz A/C Sleeper (2+1),17:30,00:36,7.1,744,3.7,82,Delhi,Shimla,,Bus,🚌
+Shrinath Travels,AC Seater (2+2),20:00,03:30,7.5,475,3.7,95,Delhi,Shimla,,Bus,🚌
+Zingbus,Volvo Multi-Axle A/C Sleeper (2+1),21:30,04:18,6.8,902,3.9,89,Delhi,Shimla,,Bus,🚌
+HRTC,Volvo Multi-Axle A/C Sleeper (2+1),22:45,05:09,6.4,816,4.2,74,Delhi,Shimla,,Bus,🚌
+FreshBus,Bharat Benz A/C Sleeper (2+1),08:30,15:54,7.4,777,4.4,83,Shimla,Delhi,,Bus,🚌
+HRTC,Volvo Multi-Axle A/C Sleeper (2+1),11:15,17:15,6.0,810,4.2,77,Shimla,Delhi,,Bus,🚌
+RSRTC,Non-AC Sleeper (2+1),14:00,22:00,8.0,439,4.3,82,Shimla,Delhi,,Bus,🚌
+NueGo,Volvo Multi-Axle A/C Sleeper (2+1),17:30,23:48,6.3,834,4.0,84,Shimla,Delhi,,Bus,🚌
+Indo Canadian Transport Co.,Non-AC Seater (2+2),20:00,04:11,8.2,299,4.7,84,Shimla,Delhi,,Bus,🚌
+NueGo,Volvo Multi-Axle A/C Sleeper (2+1),22:45,04:57,6.2,805,4.3,76,Shimla,Delhi,,Bus,🚌
+RSRTC,Volvo A/C Seater (2+2),06:00,08:18,2.3,150,3.8,71,Lucknow,Kanpur,,Bus,🚌
+Zingbus,Non-AC Seater (2+2),08:30,11:12,2.7,150,3.7,83,Lucknow,Kanpur,,Bus,🚌
+Shrinath Travels,Non-AC Sleeper (2+1),11:15,13:33,2.3,150,4.1,73,Lucknow,Kanpur,,Bus,🚌
+RSRTC,Bharat Benz A/C Sleeper (2+1),17:30,20:00,2.5,179,3.6,83,Lucknow,Kanpur,,Bus,🚌
+Laxmi Holidays,Volvo A/C Seater (2+2),20:00,22:24,2.4,159,4.5,90,Lucknow,Kanpur,,Bus,🚌
+Indo Canadian Transport Co.,Volvo A/C Seater (2+2),21:30,00:12,2.7,150,4.5,98,Lucknow,Kanpur,,Bus,🚌
+FreshBus,Premium A/C Sleeper (2+1),22:45,00:33,1.8,162,3.8,90,Lucknow,Kanpur,,Bus,🚌
+RSRTC,AC Seater (2+2),06:00,08:42,2.7,150,4.3,85,Kanpur,Lucknow,,Bus,🚌
+Laxmi Holidays,Non-AC Seater (2+2),08:30,11:18,2.8,150,4.5,97,Kanpur,Lucknow,,Bus,🚌
+UPSRTC,Volvo Multi-Axle A/C Sleeper (2+1),11:15,12:57,1.7,209,4.7,80,Kanpur,Lucknow,,Bus,🚌
+Indo Canadian Transport Co.,AC Seater (2+2),17:30,19:48,2.3,150,4.2,88,Kanpur,Lucknow,,Bus,🚌
+Indo Canadian Transport Co.,Bharat Benz A/C Sleeper (2+1),20:00,22:36,2.6,199,4.5,95,Kanpur,Lucknow,,Bus,🚌
+Indo Canadian Transport Co.,AC Seater (2+2),06:00,11:24,5.4,336,4.5,96,Delhi,Agra,,Bus,🚌
+HRTC,Non-AC Sleeper (2+1),08:30,14:18,5.8,284,3.7,73,Delhi,Agra,,Bus,🚌
+Zingbus,Non-AC Sleeper (2+1),11:15,16:15,5.0,274,4.0,81,Delhi,Agra,,Bus,🚌
+FreshBus,Volvo A/C Seater (2+2),20:00,00:05,4.1,381,4.1,73,Delhi,Agra,,Bus,🚌
+FreshBus,Volvo Multi-Axle A/C Sleeper (2+1),21:30,01:35,4.1,552,4.0,74,Delhi,Agra,,Bus,🚌
+HRTC,Volvo A/C Seater (2+2),06:00,10:42,4.7,404,3.6,83,Agra,Delhi,,Bus,🚌
+FreshBus,Premium A/C Sleeper (2+1),08:30,13:36,5.1,449,4.6,88,Agra,Delhi,,Bus,🚌
+FreshBus,Premium A/C Sleeper (2+1),11:15,16:39,5.4,436,4.0,78,Agra,Delhi,,Bus,🚌
+UPSRTC,Non-AC Sleeper (2+1),14:00,19:42,5.7,272,4.7,91,Agra,Delhi,,Bus,🚌
+RSRTC,Volvo Multi-Axle A/C Sleeper (2+1),17:30,22:18,4.8,531,4.2,98,Agra,Delhi,,Bus,🚌
+Indo Canadian Transport Co.,Non-AC Seater (2+2),20:00,01:30,5.5,226,3.5,71,Agra,Delhi,,Bus,🚌
+HRTC,Volvo A/C Seater (2+2),21:30,02:18,4.8,394,4.2,98,Agra,Delhi,,Bus,🚌
+NueGo,Premium A/C Sleeper (2+1),22:45,03:39,4.9,474,4.7,88,Agra,Delhi,,Bus,🚌
+SETC,Volvo Multi-Axle A/C Sleeper (2+1),06:00,09:00,3.0,367,4.8,83,Bangalore,Mysore,,Bus,🚌
+SETC,Non-AC Seater (2+2),11:15,14:57,3.7,150,4.2,96,Bangalore,Mysore,,Bus,🚌
+FreshBus,Volvo A/C Seater (2+2),17:30,20:06,2.6,236,4.1,73,Bangalore,Mysore,,Bus,🚌
+Kaveri Travels,Volvo A/C Seater (2+2),20:00,23:00,3.0,247,4.4,73,Bangalore,Mysore,,Bus,🚌
+FreshBus,Bharat Benz A/C Sleeper (2+1),21:30,00:48,3.3,308,4.6,85,Bangalore,Mysore,,Bus,🚌
+Kallada Travels,Volvo A/C Seater (2+2),22:45,01:57,3.2,261,4.6,87,Bangalore,Mysore,,Bus,🚌
+Kallada Travels,Non-AC Sleeper (2+1),06:00,10:05,4.1,179,4.2,94,Mysore,Bangalore,,Bus,🚌
+Royal Travels,Bharat Benz A/C Sleeper (2+1),08:30,11:42,3.2,327,4.0,98,Mysore,Bangalore,,Bus,🚌
+TSRTC,Volvo Multi-Axle A/C Sleeper (2+1),11:15,14:09,2.9,376,4.6,96,Mysore,Bangalore,,Bus,🚌
+FreshBus,Bharat Benz A/C Sleeper (2+1),14:00,17:48,3.8,328,4.3,77,Mysore,Bangalore,,Bus,🚌
+TSRTC,AC Seater (2+2),17:30,21:00,3.5,221,3.6,70,Mysore,Bangalore,,Bus,🚌
+NueGo,Volvo Multi-Axle A/C Sleeper (2+1),20:00,23:30,3.5,367,4.3,84,Mysore,Bangalore,,Bus,🚌
+Kaveri Travels,Volvo A/C Seater (2+2),21:30,00:48,3.3,234,4.3,88,Mysore,Bangalore,,Bus,🚌
+Royal Travels,Bharat Benz A/C Sleeper (2+1),22:45,02:09,3.4,332,4.6,94,Mysore,Bangalore,,Bus,🚌
+NueGo,Premium A/C Sleeper (2+1),06:00,17:30,11.5,1050,4.4,79,Bangalore,Hyderabad,,Bus,🚌
+APSRTC,Volvo A/C Seater (2+2),08:30,19:12,10.7,1029,4.4,94,Bangalore,Hyderabad,,Bus,🚌
+TSRTC,Volvo A/C Seater (2+2),11:15,21:03,9.8,986,4.6,81,Bangalore,Hyderabad,,Bus,🚌
+SRM Travels,AC Seater (2+2),14:00,01:36,11.6,858,4.4,95,Bangalore,Hyderabad,,Bus,🚌
+Kaveri Travels,AC Seater (2+2),17:30,05:18,11.8,763,4.1,91,Bangalore,Hyderabad,,Bus,🚌
+KSRTC,Non-AC Sleeper (2+1),20:00,08:12,12.2,740,4.8,77,Bangalore,Hyderabad,,Bus,🚌
+FreshBus,Volvo A/C Seater (2+2),21:30,07:42,10.2,1011,3.8,90,Bangalore,Hyderabad,,Bus,🚌
+TSRTC,AC Seater (2+2),22:45,10:33,11.8,839,4.5,77,Bangalore,Hyderabad,,Bus,🚌
+KSRTC,Volvo Multi-Axle A/C Sleeper (2+1),06:00,15:54,9.9,1462,4.1,91,Hyderabad,Bangalore,,Bus,🚌
+KSRTC,Non-AC Sleeper (2+1),08:30,20:54,12.4,691,3.7,76,Hyderabad,Bangalore,,Bus,🚌
+Kallada Travels,AC Seater (2+2),11:15,23:09,11.9,835,4.1,80,Hyderabad,Bangalore,,Bus,🚌
+KSRTC,Volvo A/C Seater (2+2),14:00,23:54,9.9,922,4.3,74,Hyderabad,Bangalore,,Bus,🚌
+FreshBus,Volvo A/C Seater (2+2),17:30,03:48,10.3,1044,4.3,89,Hyderabad,Bangalore,,Bus,🚌
+NueGo,Bharat Benz A/C Sleeper (2+1),21:30,08:42,11.2,1288,3.7,76,Hyderabad,Bangalore,,Bus,🚌
+KSRTC,Premium A/C Sleeper (2+1),22:45,10:03,11.3,1129,4.2,98,Hyderabad,Bangalore,,Bus,🚌
+SETC,Non-AC Sleeper (2+1),06:00,14:00,8.0,397,4.6,96,Bangalore,Chennai,,Bus,🚌
+FreshBus,Volvo Multi-Axle A/C Sleeper (2+1),08:30,14:42,6.2,792,4.2,95,Bangalore,Chennai,,Bus,🚌
+FreshBus,Bharat Benz A/C Sleeper (2+1),11:15,18:33,7.3,717,4.3,71,Bangalore,Chennai,,Bus,🚌
+VRL Travels,Non-AC Seater (2+2),14:00,21:54,7.9,337,3.6,74,Bangalore,Chennai,,Bus,🚌
+FreshBus,Bharat Benz A/C Sleeper (2+1),17:30,00:30,7.0,783,4.5,79,Bangalore,Chennai,,Bus,🚌
+FreshBus,Bharat Benz A/C Sleeper (2+1),20:00,02:30,6.5,736,4.4,72,Bangalore,Chennai,,Bus,🚌
+NueGo,Volvo Multi-Axle A/C Sleeper (2+1),21:30,03:36,6.1,854,3.6,89,Bangalore,Chennai,,Bus,🚌
+VRL Travels,Non-AC Sleeper (2+1),22:45,06:39,7.9,448,4.3,93,Bangalore,Chennai,,Bus,🚌
+APSRTC,Bharat Benz A/C Sleeper (2+1),06:00,12:36,6.6,766,4.7,92,Chennai,Bangalore,,Bus,🚌
+NueGo,Premium A/C Sleeper (2+1),08:30,15:18,6.8,652,4.2,74,Chennai,Bangalore,,Bus,🚌
+Kaveri Travels,AC Seater (2+2),11:15,18:45,7.5,459,4.6,84,Chennai,Bangalore,,Bus,🚌
+SRM Travels,Non-AC Sleeper (2+1),14:00,21:48,7.8,436,4.2,94,Chennai,Bangalore,,Bus,🚌
+FreshBus,Volvo Multi-Axle A/C Sleeper (2+1),20:00,02:12,6.2,792,4.5,88,Chennai,Bangalore,,Bus,🚌
+SETC,AC Seater (2+2),21:30,04:30,7.0,486,4.1,96,Chennai,Bangalore,,Bus,🚌
+VRL Travels,Volvo Multi-Axle A/C Sleeper (2+1),06:00,13:30,7.5,1054,4.5,96,Bangalore,Hubli,,Bus,🚌
+SRM Travels,Bharat Benz A/C Sleeper (2+1),11:15,19:15,8.0,923,4.4,74,Bangalore,Hubli,,Bus,🚌
+KSRTC,Non-AC Sleeper (2+1),14:00,23:06,9.1,520,4.6,86,Bangalore,Hubli,,Bus,🚌
+Royal Travels,Volvo Multi-Axle A/C Sleeper (2+1),20:00,03:54,7.9,1005,3.7,72,Bangalore,Hubli,,Bus,🚌
+Kaveri Travels,Non-AC Sleeper (2+1),22:45,08:27,9.7,500,3.7,81,Bangalore,Hubli,,Bus,🚌
+Intercity Travels,Premium A/C Sleeper (2+1),11:15,19:39,8.4,755,4.8,93,Hubli,Bangalore,,Bus,🚌
+Chartered Bus,Volvo Multi-Axle A/C Sleeper (2+1),14:00,21:42,7.7,1055,4.2,74,Hubli,Bangalore,,Bus,🚌
+CGRTC,Non-AC Sleeper (2+1),17:30,02:54,9.4,508,4.8,80,Hubli,Bangalore,,Bus,🚌
+Hans Travels,Non-AC Sleeper (2+1),20:00,05:12,9.2,501,3.9,71,Hubli,Bangalore,,Bus,🚌
+Chartered Bus,AC Seater (2+2),21:30,05:48,8.3,572,4.3,91,Hubli,Bangalore,,Bus,🚌
+Verma Travels,Non-AC Sleeper (2+1),22:45,07:45,9.0,521,4.2,80,Hubli,Bangalore,,Bus,🚌
+Royal Travels,Non-AC Seater (2+2),06:00,18:24,12.4,498,4.2,87,Ernakulam,Bangalore,,Bus,🚌
+TSRTC,Non-AC Sleeper (2+1),08:30,20:00,11.5,596,4.2,84,Ernakulam,Bangalore,,Bus,🚌
+NueGo,Volvo Multi-Axle A/C Sleeper (2+1),17:30,03:06,9.6,1217,3.6,76,Ernakulam,Bangalore,,Bus,🚌
+SETC,Non-AC Seater (2+2),20:00,08:18,12.3,480,3.9,87,Ernakulam,Bangalore,,Bus,🚌
+SETC,Premium A/C Sleeper (2+1),22:45,09:09,10.4,959,4.3,81,Ernakulam,Bangalore,,Bus,🚌
+NueGo,Premium A/C Sleeper (2+1),06:00,16:00,10.0,1057,4.0,83,Bangalore,Ernakulam,,Bus,🚌
+VRL Travels,AC Seater (2+2),08:30,19:30,11.0,695,4.2,82,Bangalore,Ernakulam,,Bus,🚌
+TSRTC,Bharat Benz A/C Sleeper (2+1),11:15,21:09,9.9,1145,4.1,94,Bangalore,Ernakulam,,Bus,🚌
+NueGo,Volvo A/C Seater (2+2),14:00,23:06,9.1,872,4.3,70,Bangalore,Ernakulam,,Bus,🚌
+SETC,Premium A/C Sleeper (2+1),17:30,03:54,10.4,1007,4.1,76,Bangalore,Ernakulam,,Bus,🚌
+KSRTC,Non-AC Sleeper (2+1),20:00,07:18,11.3,665,4.4,78,Bangalore,Ernakulam,,Bus,🚌
+TSRTC,Premium A/C Sleeper (2+1),21:30,07:36,10.1,953,3.7,75,Bangalore,Ernakulam,,Bus,🚌
+NueGo,Bharat Benz A/C Sleeper (2+1),22:45,08:45,10.0,1048,4.6,76,Bangalore,Ernakulam,,Bus,🚌
+NueGo,Premium A/C Sleeper (2+1),06:00,14:48,8.8,855,4.2,95,Chennai,Madurai,,Bus,🚌
+Kallada Travels,AC Seater (2+2),08:30,18:00,9.5,622,3.5,86,Chennai,Madurai,,Bus,🚌
+SETC,Bharat Benz A/C Sleeper (2+1),11:15,20:39,9.4,962,4.8,98,Chennai,Madurai,,Bus,🚌
+NueGo,Bharat Benz A/C Sleeper (2+1),14:00,23:24,9.4,923,4.4,83,Chennai,Madurai,,Bus,🚌
+SETC,Bharat Benz A/C Sleeper (2+1),17:30,02:36,9.1,1004,4.6,85,Chennai,Madurai,,Bus,🚌
+TSRTC,Bharat Benz A/C Sleeper (2+1),20:00,04:42,8.7,1058,4.2,86,Chennai,Madurai,,Bus,🚌
+FreshBus,Volvo Multi-Axle A/C Sleeper (2+1),21:30,05:41,8.2,1205,3.7,76,Chennai,Madurai,,Bus,🚌
+Kaveri Travels,Non-AC Seater (2+2),22:45,09:21,10.6,412,4.2,90,Chennai,Madurai,,Bus,🚌
+NueGo,Volvo Multi-Axle A/C Sleeper (2+1),06:00,14:18,8.3,1197,4.7,88,Madurai,Chennai,,Bus,🚌
+FreshBus,Bharat Benz A/C Sleeper (2+1),08:30,17:18,8.8,957,3.8,71,Madurai,Chennai,,Bus,🚌
+KSRTC,Non-AC Seater (2+2),14:00,00:54,10.9,417,4.2,91,Madurai,Chennai,,Bus,🚌
+Kallada Travels,Non-AC Sleeper (2+1),17:30,03:42,10.2,555,3.6,86,Madurai,Chennai,,Bus,🚌
+APSRTC,Volvo Multi-Axle A/C Sleeper (2+1),20:00,04:11,8.2,1110,3.5,97,Madurai,Chennai,,Bus,🚌
+APSRTC,Bharat Benz A/C Sleeper (2+1),22:45,08:09,9.4,1024,3.9,79,Madurai,Chennai,,Bus,🚌
+SRM Travels,Volvo A/C Seater (2+2),06:00,11:48,5.8,513,4.7,86,Hyderabad,Vijayawada,,Bus,🚌
+NueGo,Premium A/C Sleeper (2+1),08:30,14:18,5.8,544,3.8,89,Hyderabad,Vijayawada,,Bus,🚌
+TSRTC,Volvo A/C Seater (2+2),11:15,16:27,5.2,499,4.2,88,Hyderabad,Vijayawada,,Bus,🚌
+TSRTC,Premium A/C Sleeper (2+1),21:30,03:00,5.5,550,3.9,71,Hyderabad,Vijayawada,,Bus,🚌
+FreshBus,Volvo Multi-Axle A/C Sleeper (2+1),22:45,03:57,5.2,627,4.0,73,Hyderabad,Vijayawada,,Bus,🚌
+SETC,Non-AC Seater (2+2),06:00,13:06,7.1,254,3.6,81,Vijayawada,Hyderabad,,Bus,🚌
+APSRTC,Volvo Multi-Axle A/C Sleeper (2+1),08:30,13:54,5.4,663,4.3,70,Vijayawada,Hyderabad,,Bus,🚌
+APSRTC,Non-AC Sleeper (2+1),11:15,18:09,6.9,354,4.4,89,Vijayawada,Hyderabad,,Bus,🚌
+Kallada Travels,Non-AC Seater (2+2),14:00,20:54,6.9,239,4.2,72,Vijayawada,Hyderabad,,Bus,🚌
+SETC,Non-AC Seater (2+2),17:30,23:54,6.4,250,3.7,74,Vijayawada,Hyderabad,,Bus,🚌
+VRL Travels,Volvo A/C Seater (2+2),20:00,01:24,5.4,447,3.6,84,Vijayawada,Hyderabad,,Bus,🚌
+Kaveri Travels,Non-AC Seater (2+2),21:30,04:12,6.7,237,4.3,86,Vijayawada,Hyderabad,,Bus,🚌
+APSRTC,Bharat Benz A/C Sleeper (2+1),22:45,04:15,5.5,592,3.7,73,Vijayawada,Hyderabad,,Bus,🚌
+Siti Travels,Non-AC Seater (2+2),08:30,22:18,13.8,519,3.6,83,Kolkata,Siliguri,,Bus,🚌
+FreshBus,Bharat Benz A/C Sleeper (2+1),11:15,22:39,11.4,1353,3.9,73,Kolkata,Siliguri,,Bus,🚌
+Shyamoli Paribahan,Bharat Benz A/C Sleeper (2+1),14:00,01:12,11.2,1289,3.8,82,Kolkata,Siliguri,,Bus,🚌
+FreshBus,Volvo Multi-Axle A/C Sleeper (2+1),20:00,06:54,10.9,1411,4.4,83,Kolkata,Siliguri,,Bus,🚌
+Shyamoli Paribahan,Non-AC Seater (2+2),21:30,11:24,13.9,575,4.8,87,Kolkata,Siliguri,,Bus,🚌
+NueGo,Volvo Multi-Axle A/C Sleeper (2+1),06:00,16:12,10.2,1509,3.6,95,Siliguri,Kolkata,,Bus,🚌
+Shyamoli Paribahan,Premium A/C Sleeper (2+1),11:15,22:57,11.7,1150,4.3,90,Siliguri,Kolkata,,Bus,🚌
+Shyamoli Paribahan,Non-AC Sleeper (2+1),14:00,03:12,13.2,765,4.0,92,Siliguri,Kolkata,,Bus,🚌
+FreshBus,Volvo Multi-Axle A/C Sleeper (2+1),17:30,04:30,11.0,1421,4.0,82,Siliguri,Kolkata,,Bus,🚌
+Siti Travels,Bharat Benz A/C Sleeper (2+1),20:00,07:24,11.4,1331,4.5,96,Siliguri,Kolkata,,Bus,🚌
+Royal Cruiser,Volvo A/C Seater (2+2),06:00,13:00,7.0,698,4.8,70,Kolkata,Ranchi,,Bus,🚌
+Aitiana Travels,Premium A/C Sleeper (2+1),08:30,16:54,8.4,775,3.7,98,Kolkata,Ranchi,,Bus,🚌
+BSRTC,Bharat Benz A/C Sleeper (2+1),11:15,19:45,8.5,892,3.5,72,Kolkata,Ranchi,,Bus,🚌
+WBTC,Non-AC Seater (2+2),17:30,02:48,9.3,400,4.4,91,Kolkata,Ranchi,,Bus,🚌
+ASTC,Volvo A/C Seater (2+2),20:00,03:12,7.2,703,4.6,92,Kolkata,Ranchi,,Bus,🚌
+Shyamoli Paribahan,Volvo Multi-Axle A/C Sleeper (2+1),21:30,04:42,7.2,1009,4.6,96,Kolkata,Ranchi,,Bus,🚌
+NueGo,Volvo A/C Seater (2+2),06:00,13:06,7.1,710,4.7,80,Ranchi,Kolkata,,Bus,🚌
+BSRTC,Non-AC Seater (2+2),08:30,18:06,9.6,363,4.7,92,Ranchi,Kolkata,,Bus,🚌
+BSRTC,Volvo Multi-Axle A/C Sleeper (2+1),11:15,18:21,7.1,985,4.8,89,Ranchi,Kolkata,,Bus,🚌
+FreshBus,Premium A/C Sleeper (2+1),17:30,01:24,7.9,784,3.8,97,Ranchi,Kolkata,,Bus,🚌
+Aitiana Travels,Volvo A/C Seater (2+2),20:00,03:48,7.8,670,4.5,73,Ranchi,Kolkata,,Bus,🚌
+Siti Travels,Bharat Benz A/C Sleeper (2+1),21:30,05:36,8.1,935,3.8,78,Ranchi,Kolkata,,Bus,🚌
+Siti Travels,Volvo A/C Seater (2+2),22:45,06:39,7.9,711,4.0,88,Ranchi,Kolkata,,Bus,🚌
+WBTC,Bharat Benz A/C Sleeper (2+1),06:00,09:54,3.9,383,4.5,70,Kolkata,Digha,,Bus,🚌
+ASTC,Non-AC Sleeper (2+1),08:30,12:48,4.3,243,3.7,85,Kolkata,Digha,,Bus,🚌
+ASTC,Volvo A/C Seater (2+2),11:15,15:33,4.3,324,4.7,82,Kolkata,Digha,,Bus,🚌
+BSRTC,AC Seater (2+2),14:00,18:24,4.4,249,3.7,80,Kolkata,Digha,,Bus,🚌
+Aitiana Travels,Premium A/C Sleeper (2+1),17:30,21:54,4.4,348,3.6,87,Kolkata,Digha,,Bus,🚌
+WBTC,Volvo Multi-Axle A/C Sleeper (2+1),20:00,23:30,3.5,446,3.8,71,Kolkata,Digha,,Bus,🚌
+Royal Cruiser,Non-AC Seater (2+2),21:30,02:42,5.2,161,3.8,87,Kolkata,Digha,,Bus,🚌
+BSRTC,Bharat Benz A/C Sleeper (2+1),22:45,03:15,4.5,414,4.1,95,Kolkata,Digha,,Bus,🚌
+NueGo,Bharat Benz A/C Sleeper (2+1),06:00,09:36,3.6,396,3.6,78,Digha,Kolkata,,Bus,🚌
+Chartered Bus,AC Seater (2+2),08:30,12:48,4.3,251,3.9,95,Digha,Kolkata,,Bus,🚌
+MPSRTC,Bharat Benz A/C Sleeper (2+1),11:15,15:27,4.2,394,4.0,83,Digha,Kolkata,,Bus,🚌
+FreshBus,Bharat Benz A/C Sleeper (2+1),14:00,18:36,4.6,403,3.6,97,Digha,Kolkata,,Bus,🚌
+Chartered Bus,Volvo Multi-Axle A/C Sleeper (2+1),17:30,21:24,3.9,460,4.0,93,Digha,Kolkata,,Bus,🚌
+Verma Travels,AC Seater (2+2),20:00,00:24,4.4,283,3.8,81,Digha,Kolkata,,Bus,🚌
+FreshBus,Volvo A/C Seater (2+2),21:30,00:54,3.4,308,3.8,78,Digha,Kolkata,,Bus,🚌
+FreshBus,Bharat Benz A/C Sleeper (2+1),22:45,02:33,3.8,382,3.8,96,Digha,Kolkata,,Bus,🚌
+NueGo,Premium A/C Sleeper (2+1),06:00,17:24,11.4,1089,3.7,87,Kolkata,Patna,,Bus,🚌
+ASTC,Bharat Benz A/C Sleeper (2+1),08:30,20:06,11.6,1262,4.7,89,Kolkata,Patna,,Bus,🚌
+Siti Travels,Volvo Multi-Axle A/C Sleeper (2+1),11:15,21:57,10.7,1503,3.5,90,Kolkata,Patna,,Bus,🚌
+Siti Travels,AC Seater (2+2),14:00,01:42,11.7,865,4.2,87,Kolkata,Patna,,Bus,🚌
+Siti Travels,Non-AC Sleeper (2+1),17:30,06:42,13.2,702,4.2,71,Kolkata,Patna,,Bus,🚌
+Aitiana Travels,AC Seater (2+2),20:00,08:12,12.2,860,4.1,87,Kolkata,Patna,,Bus,🚌
+FreshBus,Volvo A/C Seater (2+2),21:30,07:30,10.0,995,4.2,97,Kolkata,Patna,,Bus,🚌
+WBTC,AC Seater (2+2),22:45,10:21,11.6,858,3.6,82,Kolkata,Patna,,Bus,🚌
+Aitiana Travels,Non-AC Sleeper (2+1),08:30,21:48,13.3,737,4.0,85,Patna,Kolkata,,Bus,🚌
+ASTC,Non-AC Seater (2+2),11:15,00:27,13.2,520,3.8,74,Patna,Kolkata,,Bus,🚌
+Shyamoli Paribahan,Volvo A/C Seater (2+2),14:00,00:42,10.7,1032,4.8,86,Patna,Kolkata,,Bus,🚌
+Shyamoli Paribahan,Volvo A/C Seater (2+2),20:00,06:54,10.9,957,4.5,70,Patna,Kolkata,,Bus,🚌
+Aitiana Travels,Bharat Benz A/C Sleeper (2+1),21:30,08:18,10.8,1305,4.2,88,Patna,Kolkata,,Bus,🚌
+Shyamoli Paribahan,Bharat Benz A/C Sleeper (2+1),22:45,10:03,11.3,1310,4.4,76,Patna,Kolkata,,Bus,🚌
+Aitiana Travels,Premium A/C Sleeper (2+1),08:30,14:36,6.1,558,4.7,76,Guwahati,Jorhat,,Bus,🚌
+ASTC,Non-AC Seater (2+2),14:00,21:00,7.0,299,4.0,95,Guwahati,Jorhat,,Bus,🚌
+BSRTC,Bharat Benz A/C Sleeper (2+1),17:30,23:48,6.3,686,3.5,76,Guwahati,Jorhat,,Bus,🚌
+BSRTC,Bharat Benz A/C Sleeper (2+1),20:00,02:30,6.5,691,4.1,88,Guwahati,Jorhat,,Bus,🚌
+FreshBus,Volvo Multi-Axle A/C Sleeper (2+1),21:30,03:06,5.6,769,4.2,98,Guwahati,Jorhat,,Bus,🚌
+Shyamoli Paribahan,Bharat Benz A/C Sleeper (2+1),06:00,12:00,6.0,669,4.0,86,Jorhat,Guwahati,,Bus,🚌
+Royal Cruiser,Volvo Multi-Axle A/C Sleeper (2+1),08:30,14:42,6.2,729,4.6,79,Jorhat,Guwahati,,Bus,🚌
+FreshBus,Volvo Multi-Axle A/C Sleeper (2+1),11:15,16:57,5.7,723,3.7,88,Jorhat,Guwahati,,Bus,🚌
+BSRTC,Bharat Benz A/C Sleeper (2+1),14:00,20:36,6.6,612,4.6,88,Jorhat,Guwahati,,Bus,🚌
+Shyamoli Paribahan,AC Seater (2+2),17:30,00:00,6.5,409,3.6,88,Jorhat,Guwahati,,Bus,🚌
+ASTC,Volvo Multi-Axle A/C Sleeper (2+1),20:00,01:24,5.4,742,4.1,89,Jorhat,Guwahati,,Bus,🚌
+BSRTC,AC Seater (2+2),21:30,03:54,6.4,431,3.9,91,Jorhat,Guwahati,,Bus,🚌
+NueGo,Volvo Multi-Axle A/C Sleeper (2+1),22:45,04:39,5.9,706,4.0,84,Jorhat,Guwahati,,Bus,🚌

@@ -376,7 +376,7 @@
                     {% endif %}
                 </div>
                 {% if bus.bus_type %}<div class="bus-type-badge">{{ bus.bus_type }}</div>{% endif %}
-                {% if bus.link %}<a href="{{ bus.link }}" target="_blank" class="bus-link">🔗 Book on RedBus →</a>{% endif %}
+                {% if bus.link %}<a href="{{ bus.link }}" target="_blank" class="bus-link booking-link" data-history-id="{{ history_id }}" data-mode="Bus">🔗 Book on RedBus →</a>{% endif %}
             </div>
             {% endfor %}
 
@@ -536,6 +536,29 @@ function selectBus(idx) {
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         lucide.createIcons();
+        
+        // Travel Recommendation Booking Logger
+        document.addEventListener('click', function(e) {
+            const target = e.target.closest('.booking-link');
+            if (target) {
+                const historyId = target.getAttribute('data-history-id');
+                const selectedMode = target.getAttribute('data-mode');
+                if (historyId && selectedMode) {
+                    fetch('/log-booking', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            history_id: historyId,
+                            selected_mode: selectedMode
+                        })
+                    }).then(r => r.json())
+                      .then(d => console.log('Logged booking choice:', d))
+                      .catch(err => console.error('Booking logging failed:', err));
+                }
+            }
+        });
     });
 </script>
 </body>
