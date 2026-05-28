@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Train Plan — {{ source }} to {{ destination }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-deep:    #050d1a;
+            --bg-panel:   #091325;
+            --bg-card:    #0d1e36;
+            --bg-card2:   #0f2340;
+            --border:     rgba(30,90,180,0.22);
+            --border-glow:rgba(59,130,246,0.45);
+            --blue-vivid: #3b82f6;
+            --blue-neon:  #00aaff;
+            --text-pri:   #e2eafc;
+            --text-sec:   #8da2c4;
+            --text-muted: #4e6180;
+            --radius:     12px;
+            --radius-sm:  6px;
+            --transition: all 0.25s ease;
+            --shadow-card:0 10px 30px rgba(2,5,12,0.6);
+        }
+
+        html, body {
+            height: 100%; width: 100%;
+            font-family: 'Exo 2', sans-serif;
+            background: var(--bg-deep);
+            color: var(--text-pri);
+            overflow: hidden;
+        }
+
+        .layout-grid {
+            display: flex;
+            height: 100vh;
+            width: 100%;
+        }
+
+        /* SIDEBAR CONTAINER PANEL */
+        .panel-sidebar {
+            width: 440px;
+            min-width: 440px;
+            background: var(--bg-panel);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 10px 0 30px rgba(0,0,0,0.3);
+            z-index: 20;
+        }
+
+        .panel-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--border);
+            background: linear-gradient(180deg, rgba(9,19,37,0.4) 0%, rgba(9,19,37,0) 100%);
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--blue-neon);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            transition: var(--transition);
+        }
+        .back-btn:hover { transform: translateX(-4px); }
+
+        .panel-header h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+        .panel-header p {
+            font-size: 13px;
+            color: var(--text-sec);
+        }
+
+        /* SCROLLABLE ROUTE FEED OPTIONS */
+        .panel-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .panel-content::-webkit-scrollbar { width: 6px; }
+        .panel-content::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.2); border-radius: 10px; }
+
+        .route-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+        .route-card:hover {
+            border-color: var(--blue-neon);
+            background: var(--bg-card2);
+            transform: translateY(-2px);
+        }
+        .route-card.selected {
+            border-color: var(--blue-neon);
+            box-shadow: 0 0 15px rgba(0,170,255,0.2);
+            background: var(--bg-card2);
+        }
+
+        .route-card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .train-identity {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+        }
+        .train-number {
+            font-size: 12px;
+            color: var(--text-sec);
+            margin-left: 6px;
+        }
+        .total-duration-badge {
+            background: rgba(0,170,255,0.1);
+            color: var(--blue-neon);
+            border: 1px solid var(--border-glow);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        /* TIMELINE FLOW LAYOUT VISUALS */
+        .timeline-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 14px;
+            position: relative;
+        }
+        .timeline-node {
+            display: flex;
+            gap: 16px;
+            position: relative;
+        }
+        .node-marker {
+            width: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .node-circle {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--text-muted);
+            z-index: 2;
+        }
+        .node-circle.active {
+            background: var(--blue-neon);
+            box-shadow: 0 0 8px var(--blue-neon);
+        }
+        .node-line {
+            position: absolute;
+            top: 14px; bottom: -14px; left: 7px;
+            width: 2px;
+            background: var(--border);
+            z-index: 1;
+        }
+        .timeline-node:last-child .node-line { display: none; }
+
+        .node-details { flex: 1; }
+        .node-place { font-size: 13px; font-weight: 600; color: #fff; }
+        .node-info { font-size: 11px; color: var(--text-sec); margin-top: 2px; }
+
+        /* MULTI-STAGE LEG DETAIL CARD HORIZONTAL CONTAINER STRIP */
+        .leg-cards-wrap {
+            position: absolute; bottom: 24px; left: 464px; right: 24px;
+            display: flex; gap: 16px; z-index: 500;
+            pointer-events: none; opacity: 0; transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .leg-cards-wrap.visible { pointer-events: auto; opacity: 1; transform: translateY(0); }
+
+        .leg-segment-card {
+            flex: 1; background: rgba(9, 19, 37, 0.9);
+            border: 1px solid var(--border); border-radius: var(--radius);
+            padding: 16px; backdrop-filter: blur(16px);
+            box-shadow: var(--shadow-card);
+        }
+        .leg-label {
+            font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;
+        }
+        .leg-route { font-size: 13px; font-weight: 600; color: #fff; }
+        .leg-detail { font-size: 12px; color: var(--text-sec); margin-top: 4px; }
+        .leg-extra { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+        /* RIGHT MAP CANVAS STRETCH */
+        .map-frame { flex: 1; position: relative; background: var(--bg-deep); }
+        #route-map { width: 100%; height: 100%; }
+
+        /* LEAFLET DARK INTERVERSION FILTERS */
+        .leaflet-tile { filter: invert(1) hue-rotate(190deg) brightness(0.75) saturate(0.8); }
+        .leaflet-container { background: var(--bg-deep) !important; }
+
+        .no-data-alert {
+            text-align: center; padding: 40px 20px;
+            border: 1px dashed var(--border); border-radius: var(--radius);
+            color: var(--text-sec); font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="layout-grid">
+        <div class="panel-sidebar">
+            <div class="panel-header">
+                <a href="/" class="back-btn"><i data-lucide="arrow-left" style="width:14px;height:14px;vertical-align:middle;"></i> Modify Route</a>
+                <h1>Integrated Train Itineraries</h1>
+                <p>From <strong>{{ source }}</strong> to <strong>{{ destination }}</strong></p>
+            </div>
+
+            <div class="panel-content">
+                {% if not trains or trains|length == 0 %}
+                <div class="no-data-alert">
+                    <i data-lucide="alert-circle" style="width:32px;height:32px;color:var(--text-muted);margin-bottom:12px;"></i>
+                    <p>No optimal train routes matched for this configuration.</p>
+                </div>
+                {% else %}
+                    {% for t in trains %}
+                    <div class="route-card" data-route-id="{{ loop.index0 }}" onclick="selectRoute('{{ loop.index0 }}')">
+                        <div class="route-card-meta">
+                            <span class="train-identity">
+                                🚆 {{ t.train_name }} <span class="train-number">#{{ t.train_number }}</span>
+                            </span>
+                            <span class="total-duration-badge">{{ t.total_duration }} min total</span>
+                        </div>
+
+                        <div class="timeline-flow">
+                            <div class="timeline-node">
+                                <div class="node-marker"><div class="node-circle active"></div><div class="node-line"></div></div>
+                                <div class="node-details">
+                                    <div class="node-place">Origin Connect: {{ source }}</div>
+                                    <div class="node-info">Ground transit to station ({{ t.ground_1.dist }} km, {{ t.ground_1.dur }} min)</div>
+                                </div>
+                            </div>
+
+                            <div class="timeline-node">
+                                <div class="node-marker"><div class="node-circle active"></div><div class="node-line"></div></div>
+                                <div class="node-details">
+                                    <div class="node-place">Board Train: {{ t.from_stn_name }}</div>
+                                    <div class="node-info">Departs: {{ t.departure_time }} | {{ t.train_dist }} km rail leg</div>
+                                </div>
+                            </div>
+
+                            <div class="timeline-node">
+                                <div class="node-marker"><div class="node-circle active"></div><div class="node-line"></div></div>
+                                <div class="node-details">
+                                    <div class="node-place">Arrive Station: {{ t.to_stn_name }}</div>
+                                    <div class="node-info">Arrival estimated: {{ t.arrival_time }}</div>
+                                </div>
+                            </div>
+
+                            <div class="timeline-node">
+                                <div class="node-marker"><div class="node-circle"></div></div>
+                                <div class="node-details">
+                                    <div class="node-place">Destination Arrival: {{ destination }}</div>
+                                    <div class="node-info">Ground transit to target ({{ t.ground_2.dist }} km, {{ t.ground_2.dur }} min)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="map-frame">
+            <div id="route-map"></div>
+        </div>
+    </div>
+
+    <div class="leg-cards-wrap" id="legCardsWrap"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        lucide.createIcons();
+
+        // Injected Global Configuration Context Coordinates variables
+        const FROM_LAT = {{ from_lat if from_lat is not none else 'null' }};
+        const FROM_LON = {{ from_lon if from_lon is not none else 'null' }};
+        const TO_LAT   = {{ to_lat if to_lat is not none else 'null' }};
+        const TO_LON   = {{ to_lon if to_lon is not none else 'null' }};
+
+        const FROM_STN_LAT = {{ from_stn_lat if from_stn_lat is not none else 'null' }};
+        const FROM_STN_LON = {{ from_stn_lon if from_stn_lon is not none else 'null' }};
+        const TO_STN_LAT   = {{ to_stn_lat if to_stn_lat is not none else 'null' }};
+        const TO_STN_LON   = {{ to_stn_lon if to_stn_lon is not none else 'null' }};
+
+        const SOURCE = "{{ source }}";
+        const DESTINATION = "{{ destination }}";
+
+        // Pre-parse the python dynamic context array dictionary into client JS memory context
+        const ROUTES_DATA = {% if trains %}{{ trains|tojson }}{% else %}[]{% endif %};
+
+        var map = L.map('route-map').setView([22.0, 78.0], 5);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
+
+        var mapLayers = [];
+
+        function clearMapLayers() {
+            mapLayers.forEach(l => map.removeLayer(l));
+            mapLayers = [];
+        }
+
+        function drawRoute(idx) {
+            clearMapLayers();
+            const r = ROUTES_DATA[idx];
+            if(!r) return;
+
+            let bounds = L.latLngBounds();
+
+            // Segment 1 Line: Origin to Station Node Link
+            if(FROM_LAT && FROM_LON && FROM_STN_LAT && FROM_STN_LON) {
+                let p1 = L.polyline([[FROM_LAT, FROM_LON], [FROM_STN_LAT, FROM_STN_LON]], {color: '#6366f1', weight: 4, dashArray: '5, 8'}).addTo(map);
+                mapLayers.push(p1);
+                bounds.extend([FROM_LAT, FROM_LON]); bounds.extend([FROM_STN_LAT, FROM_STN_LON]);
+            }
+
+            // Segment 2 Line: Rail Track Connection Route Link
+            if(FROM_STN_LAT && FROM_STN_LON && TO_STN_LAT && TO_STN_LON) {
+                let p2 = L.polyline([[FROM_STN_LAT, FROM_STN_LON], [TO_STN_LAT, TO_STN_LON]], {color: '#00aaff', weight: 6}).addTo(map);
+                mapLayers.push(p2);
+                bounds.extend([FROM_STN_LAT, FROM_STN_LON]); bounds.extend([TO_STN_LAT, TO_STN_LON]);
+            }
+
+            // Segment 3 Line: Station to Final Destination Target Link
+            if(TO_STN_LAT && TO_STN_LON && TO_LAT && TO_LON) {
+                let p3 = L.polyline([[TO_STN_LAT, TO_STN_LON], [TO_LAT, TO_LON]], {color: '#10b981', weight: 4, dashArray: '5, 8'}).addTo(map);
+                mapLayers.push(p3);
+                bounds.extend([TO_STN_LAT, TO_STN_LON]); bounds.extend([TO_LAT, TO_LON]);
+            }
+
+            // Markers setup
+            const startMarker = L.marker([FROM_LAT, FROM_LON], {
+                icon: L.divIcon({ html: `<div style="background:#3b82f6;color:#fff;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;box-shadow:var(--shadow-card);white-space:nowrap;">🟢 Start</div>` })
+            });
+            startMarker.addTo(map); mapLayers.push(startMarker);
+
+            const stn1Marker = L.marker([FROM_STN_LAT, FROM_STN_LON], {
+                icon: L.divIcon({ html: `<div style="background:#0d1e36;color:#00aaff;border:1px solid var(--border-glow);padding:4px 8px;border-radius:6px;font-size:11px;font-weight:600;white-space:nowrap;">🚉 ${r.from_stn_code}</div>` })
+            });
+            stn1Marker.addTo(map); mapLayers.push(stn1Marker);
+
+            const stn2Marker = L.marker([TO_STN_LAT, TO_STN_LON], {
+                icon: L.divIcon({ html: `<div style="background:#0d1e36;color:#00aaff;border:1px solid var(--border-glow);padding:4px 8px;border-radius:6px;font-size:11px;font-weight:600;white-space:nowrap;">🚉 ${r.to_stn_code}</div>` })
+            });
+            stn2Marker.addTo(map); mapLayers.push(stn2Marker);
+
+            // Rebuild dynamic card labels strip text without bus references
+            const wrap = document.getElementById('legCardsWrap');
+            const ground1 = r.ground_1 || {dist:0, dur:0};
+            const ground2 = r.ground_2 || {dist:0, dur:0};
+            const fromStnName = r.from_stn_name || "Station A";
+            const toStnName = r.to_stn_name || "Station B";
+
+            wrap.innerHTML = `
+                <div class="leg-segment-card" style="border-left: 4px solid #6366f1;">
+                    <div class="leg-label" style="color:#818cf8;">🚗 First Connect</div>
+                    <div class="leg-route">${SOURCE.split(',')[0]} → ${fromStnName}</div>
+                    <div class="leg-detail">${ground1.dur} min transit</div>
+                    <div class="leg-extra">${ground1.dist} km distance</div>
+                </div>
+                <div class="leg-segment-card" style="border-left: 4px solid #00aaff;">
+                    <div class="leg-label" style="color:#38bdf8;">🚆 Main Line Rail</div>
+                    <div class="leg-route">${r.train_name} (${r.train_number})</div>
+                    <div class="leg-detail">${r.departure_time} → ${r.arrival_time}</div>
+                    <div class="leg-extra">${r.train_dist} km track</div>
+                </div>
+            `;
+
+            if(ground2 && ground2.dist > 0) {
+                wrap.innerHTML += `
+                    <div class="leg-segment-card" style="border-left: 4px solid #10b981;">
+                        <div class="leg-label" style="color:#34d399;">🚗 Final Connect</div>
+                        <div class="leg-route">${toStnName} → ${DESTINATION.split(',')[0]}</div>
+                        <div class="leg-detail">${ground2.dur} min transit</div>
+                        <div class="leg-extra">${ground2.dist} km distance</div>
+                    </div>`;
+            }
+
+            const endMarker = L.marker([TO_LAT, TO_LON], {
+                icon: L.divIcon({ html: `<div style="background:#10b981;color:#fff;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;box-shadow:var(--shadow-card);white-space:nowrap;">📍 End</div>` })
+            });
+            endMarker.addTo(map); mapLayers.push(endMarker);
+            bounds.extend([TO_LAT, TO_LON]);
+
+            map.fitBounds(bounds, { padding: [50, 50] });
+            document.getElementById('legCardsWrap').classList.add('visible');
+        }
+
+        function selectRoute(routeId) {
+            document.querySelectorAll('.route-card').forEach(c => c.classList.remove('selected'));
+            const el = document.querySelector(`[data-route-id="${routeId}\"]`);
+            if(el) el.classList.add('selected');
+            drawRoute(routeId);
+        }
+
+        (function() {
+            if (FROM_STN_LAT && TO_STN_LAT && ROUTES_DATA.length > 0) {
+                selectRoute(0);
+            }
+        })();
+    </script>
+</body>
+</html>

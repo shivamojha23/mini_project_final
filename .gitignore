@@ -1,0 +1,16 @@
+# Ignore python virtual environments and editor settings
+.venv/
+.idea/
+
+# Ignore python cache folders
+__pycache__/
+*.pyc
+
+# Ignore large raw data files and local caches
+airports
+all_india_stations_small
+boundary_results.txt
+bus_data
+bus_data.parquet
+final_junction1
+flight_cache.json

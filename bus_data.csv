@@ -1,0 +1,3 @@
+operator,bus_type,depart,arrive,duration,price,rating,punctuality,source,destination,date,type,icon
+Verma Travels (Live),Volvo A/C Sleeper,22:00,06:00,8.0,850,4.5,90,Indore,Bhopal,,Bus,🚌
+Hans Travels (Live),Non-A/C Sleeper,21:30,05:00,7.5,600,3.8,70,Indore,Bhopal,,Bus,🚌

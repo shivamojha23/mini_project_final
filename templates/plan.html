@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Train Plan — {{ source }} to {{ destination }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-deep:    #050d1a;
+            --bg-panel:   #091325;
+            --bg-card:    #0d1e36;
+            --bg-card2:   #0f2340;
+            --border:     rgba(30,90,180,0.22);
+            --border-glow:rgba(59,130,246,0.45);
+            --blue-vivid: #3b82f6;
+            --blue-neon:  #00aaff;
+            --blue-mid:   #1d6fd8;
+            --gold:       #f59e0b;
+            --green:      #10b981;
+            --text-pri:   #e2eafc;
+            --text-sec:   #8da2c4;
+            --text-muted: #4e6180;
+            --accent-rec: #00ffcc;
+            --shadow-blue:0 0 15px rgba(0,170,255,0.25);
+            --shadow-card:0 10px 30px rgba(2,5,12,0.6);
+            --radius:     12px;
+            --radius-sm:  6px;
+            --transition: all 0.25s ease;
+        }
+
+        html, body {
+            height: 100%; width: 100%;
+            font-family: 'Exo 2', sans-serif;
+            background: var(--bg-deep);
+            color: var(--text-pri);
+            overflow: hidden;
+        }
+
+        .nav-icon { width: 18px; height: 18px; color: var(--text-sec); transition: var(--transition); }
+        .inline-icon { width: 15px; height: 15px; color: var(--blue-neon); vertical-align: middle; margin-right: 4px; }
+
+        /* ── SYSTEM NAV TRANSFERENCE (180px Width) ── */
+        .module-nav {
+            position: fixed; left: 0; top: 0;
+            width: 180px; height: 100vh;
+            background: #111622;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex; flex-direction: column;
+            padding: 24px 12px; gap: 6px; z-index: 100;
+        }
+        .module-nav .nav-logo {
+            padding: 0 12px; margin-bottom: 24px; text-decoration: none;
+            transition: var(--transition); color: var(--blue-neon);
+            display: flex; align-items: center;
+        }
+        .module-nav .nav-logo:hover { transform: scale(1.02); }
+        
+        .module-nav a.nav-btn {
+            width: 100%; height: 44px; border-radius: 8px;
+            display: flex; align-items: center; justify-content: flex-start;
+            text-decoration: none; color: var(--text-sec);
+            transition: var(--transition); padding: 0 14px; gap: 12px;
+            border: 1px solid transparent; position: relative;
+        }
+        .module-nav a.nav-btn:hover { background: rgba(255, 255, 255, 0.03); color: #fff; }
+        .module-nav a.nav-btn:hover .nav-icon { color: #fff; }
+        .module-nav a.nav-btn.active { background: rgba(255, 255, 255, 0.05); color: #fff; }
+        .module-nav a.nav-btn.active .nav-icon { color: var(--accent-rec); }
+        .module-nav a.nav-btn.active::before {
+            content: ''; position: absolute; right: 14px;
+            width: 6px; height: 6px; background-color: var(--accent-rec);
+            border-radius: 50%; box-shadow: 0 0 8px var(--accent-rec);
+        }
+        .module-nav a.nav-btn .nav-text { font-size: 13px; font-weight: 500; text-transform: capitalize; }
+        .module-nav .nav-spacer { flex: 1; }
+        .module-nav .nav-divider { width: 100%; height: 1px; background: rgba(255,255,255,0.05); margin: 8px 0; }
+
+        /* ── CORE GRID MATRIX ── */
+        .container { display: flex; height: 100vh; width: calc(100% - 180px); margin-left: 180px; }
+
+        .sidebar {
+            width: 440px; min-width: 440px; background: var(--bg-panel);
+            border-right: 1px solid var(--border); overflow-y: auto;
+            display: flex; flex-direction: column; z-index: 10;
+            box-shadow: 10px 0 30px rgba(0,0,0,0.2);
+        }
+        .sidebar::-webkit-scrollbar, .content::-webkit-scrollbar { width: 6px; }
+        .sidebar::-webkit-scrollbar-track, .content::-webkit-scrollbar-track { background: transparent; }
+        .sidebar::-webkit-scrollbar-thumb, .content::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.2); border-radius: 10px; }
+
+        .header { padding: 32px 28px 20px; background: linear-gradient(180deg, rgba(9,19,37,0.6) 0%, rgba(9,19,37,0) 100%); }
+        .header h1 { font-family: 'Rajdhani', sans-serif; font-size: 32px; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
+        .header h1 span { color: var(--blue-neon); text-shadow: var(--shadow-blue); }
+        
+        .header-route { display: flex; align-items: center; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+        .header-route .city { font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 15px; color: var(--text-pri); }
+        .header-route .arrow { color: var(--blue-neon); font-size: 14px; }
+        .header-route .date-badge {
+            background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text-sec);
+            padding: 3px 10px; border-radius: 12px; font-size: 11px; margin-left: auto; font-family: 'Rajdhani', sans-serif;
+        }
+
+        .content { padding: 0 28px 32px; flex: 1; }
+
+        /* ── HUB RAILWAY BAR ── */
+        .station-bar {
+            background: linear-gradient(135deg, rgba(13,30,54,0.7) 0%, rgba(15,35,64,0.4) 100%);
+            border: 1px solid var(--border); border-radius: var(--radius); padding: 16px;
+            display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;
+        }
+        .stn { flex: 1; }
+        .stn-code { font-family: 'Rajdhani', sans-serif; font-weight: 800; font-size: 22px; color: var(--blue-neon); line-height: 1; }
+        .stn-name { font-size: 11px; color: var(--text-sec); margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width:130px; }
+        .train-icon { color: var(--blue-neon); opacity: 0.8; font-family: 'Rajdhani', sans-serif; font-weight: 700; }
+
+        /* ── CYBER ROUTE CARDS ── */
+        .route-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+            padding: 18px; margin-bottom: 12px; cursor: pointer; transition: var(--transition);
+        }
+        .route-card:hover { border-color: var(--blue-neon); background: var(--bg-card2); transform: translateY(-1px); }
+        .route-card.selected { border-color: var(--blue-neon); background: var(--bg-card2); box-shadow: var(--shadow-blue); }
+
+        .route-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+        .route-num {
+            width: 26px; height: 26px; border-radius: 6px; background: rgba(0, 170, 255, 0.1); color: var(--blue-neon);
+            font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 13px;
+            display: flex; align-items: center; justify-content: center; border: 1px solid rgba(0, 170, 255, 0.15);
+        }
+        .route-type { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 16px; color: #fff; text-transform: uppercase; }
+        .route-badge-best {
+            background: rgba(16,185,129,0.15); color: var(--green); font-size: 11px; font-weight: 600;
+            padding: 2px 10px; border-radius: 12px; margin-left: auto; border: 1px solid rgba(16,185,129,0.3);
+            font-family: 'Rajdhani', sans-serif; text-transform: uppercase;
+        }
+
+        .step-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; position: relative; }
+        .step-icon { font-size: 14px; margin-top: 1px; color: var(--blue-neon); }
+        .step-info { flex: 1; }
+        .step-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; font-family: 'Rajdhani', sans-serif; }
+        .step-route-text { font-size: 13px; color: var(--text-pri); font-weight: 500; margin-top: 1px; }
+
+        .train-mini { font-size: 11px; color: var(--text-sec); margin-top: 4px; background: rgba(0,0,0,0.15); padding: 4px 8px; border-radius: 4px; }
+        .train-mini b { color: #fff; }
+
+        .empty-state { text-align: center; padding: 60px 20px; color: var(--text-sec); }
+        .empty-state .icon { font-size: 40px; margin-bottom: 12px; opacity: 0.4; }
+        .empty-state h2 { font-family: 'Rajdhani', sans-serif; color: #fff; font-size: 18px; }
+
+        /* ── MAP CONTAINER INFRASTRUCTURE ── */
+        .map-container { flex: 1; background: var(--bg-deep); position: relative; overflow: hidden; display: flex; flex-direction: column; }
+        #leafletMap { flex: 1; width: 100%; z-index: 1; }
+        .map-placeholder {
+            width: 100%; height: 100%; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; color: var(--text-muted); text-align: center;
+        }
+        .map-placeholder .icon-big { font-size: 48px; margin-bottom: 12px; opacity: 0.3; }
+
+        .map-info-bar {
+            position: absolute; top: 24px; left: 24px;
+            background: rgba(9, 19, 37, 0.85); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 14px 20px; backdrop-filter: blur(16px);
+            z-index: 500; min-width: 320px; box-shadow: var(--shadow-card); display: none;
+        }
+        .map-info-bar.visible { display: block; }
+        #mapTitle { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 15px; color: #fff; text-transform: uppercase; }
+        #mapSubtitle { font-size: 11px; color: var(--text-sec); margin-top: 2px; }
+
+        .leg-cards-wrap { display: none; padding: 16px 24px; background: var(--bg-panel); border-top: 1px solid var(--border); z-index: 10; }
+        .leg-cards-wrap.visible { display: block; }
+        .leg-cards { display: flex; gap: 12px; flex-wrap: wrap; }
+        .leg-card {
+            flex: 1; min-width: 140px; background: var(--bg-card); border-radius: var(--radius-sm);
+            padding: 12px 16px; border: 1px solid var(--border); border-left: 3px solid var(--blue-neon);
+        }
+        .leg-card.ground-leg { border-left-color: var(--blue-vivid); }
+        .leg-card.train-leg { border-left-color: var(--gold); }
+        .leg-card .leg-label { font-size: 10px; color: var(--text-sec); margin-bottom: 3px; font-weight: 600; text-transform: uppercase; font-family: 'Rajdhani', sans-serif; }
+        .leg-card .leg-route { font-size: 14px; font-weight: 600; color: #fff; font-family: 'Rajdhani', sans-serif; }
+        .leg-card .leg-detail { font-size: 12px; color: var(--text-sec); margin-top: 4px; }
+        .leg-card .leg-extra { font-size: 11px; color: var(--accent-rec); margin-top: 2px; font-family: 'Rajdhani', sans-serif; }
+
+        /* ── INVERSE MAP POPUP RE-THEMING ── */
+        .ground-label {
+            background: var(--bg-panel); border: 1px solid var(--blue-vivid); color: #fff;
+            font-family: 'Exo 2', sans-serif; font-size: 11px; padding: 4px 10px; border-radius: 4px; white-space: nowrap; box-shadow: var(--shadow-card);
+        }
+        .train-label {
+            background: var(--bg-panel); border: 1px solid var(--gold); color: #fff;
+            font-family: 'Exo 2', sans-serif; font-size: 11px; padding: 4px 12px; border-radius: 4px; white-space: nowrap; box-shadow: var(--shadow-card);
+        }
+        .station-label {
+            font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 12px; color: #fff;
+            background: var(--bg-panel); border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; box-shadow: var(--shadow-card);
+        }
+
+        .leaflet-tile { filter: invert(1) hue-rotate(190deg) brightness(0.75) saturate(0.8); }
+        .leaflet-container { background: var(--bg-deep) !important; }
+        .leaflet-popup-content-wrapper { background: var(--bg-panel) !important; border: 1px solid var(--border) !important; color: #fff !important; border-radius: 8px !important; }
+        .leaflet-popup-tip { background: var(--bg-panel) !important; }
+
+        @media (max-width: 1024px) {
+            .container { flex-direction: column; width: calc(100% - 180px); margin-left: 180px; }
+            .sidebar { width: 100%; height: 45%; min-width: unset; border-right: none; border-bottom: 1px solid var(--border); }
+            .map-container { height: 55%; }
+            .map-info-bar { top: 16px; left: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="module-nav">
+    <a href="#" class="nav-logo">
+        <i data-lucide="globe" style="width: 22px; height: 22px; margin-right: 10px;"></i>
+        <span style="font-family: 'Rajdhani', sans-serif; font-weight:700; font-size:18px; color:#fff;">Hub</span>
+    </a>
+    <a href="/" class="nav-btn" title="Route">
+        <i data-lucide="map" class="nav-icon"></i>
+        <span class="nav-text">Map</span>
+    </a>
+    <a href="#" class="nav-btn active" title="Train">
+        <i data-lucide="train" class="nav-icon"></i>
+        <span class="nav-text">Train</span>
+    </a>
+    <a href="/bus?source={{ source }}&destination={{ destination }}&date={{ date }}" class="nav-btn" title="Bus">
+        <i data-lucide="bus" class="nav-icon"></i>
+        <span class="nav-text">Bus</span>
+    </a>
+    <a href="/flight/results?from_place={{ source }}&to_place={{ destination }}&date={{ date }}" class="nav-btn" title="Flight">
+        <i data-lucide="plane" class="nav-icon"></i>
+        <span class="nav-text">Flights</span>
+    </a>
+    <div class="nav-spacer"></div>
+    <div class="nav-divider"></div>
+    <a href="/" class="nav-btn" title="New Search">
+        <i data-lucide="rotate-ccw" class="nav-icon" style="color: var(--accent-rec);"></i>
+        <span class="nav-text" style="color: var(--accent-rec);">New Search</span>
+    </a>
+    <a href="/logout" class="nav-btn" title="Logout" style="color:#ef4444;">
+        <i data-lucide="log-out" class="nav-icon" style="color:#ef4444;"></i>
+        <span class="nav-text">Logout</span>
+    </a>
+</div>
+
+<div class="container">
+    <div class="sidebar">
+        <div class="header">
+            <div class="header-badge" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(0, 170, 255, 0.1); border: 1px solid rgba(0, 170, 255, 0.3); border-radius: 30px; padding: 4px 14px; font-size: 11px; font-weight: 600; color: var(--blue-neon); font-family: 'Rajdhani'; margin-bottom:12px;">
+                <i data-lucide="shield-check" class="inline-icon"></i> Transit Router Engine
+            </div>
+            <h1>TRAIN <span>MATRIX</span></h1>
+            <div class="header-route">
+                <span class="city">{{ source }}</span>
+                <span class="arrow">→</span>
+                <span class="city">{{ destination }}</span>
+                {% if date %}<span class="date-badge">{{ date }}</span>{% endif %}
+            </div>
+        </div>
+
+        <div class="content">
+            {% if from_stn_name and to_stn_name %}
+            <div class="station-bar">
+                <div class="stn">
+                    <div class="stn-code">{{ from_stn_name[:3]|upper }}</div>
+                    <div class="stn-name">{{ from_stn_name }}</div>
+                </div>
+                <div class="train-icon">⚡ CONNECTING RAILWAYS</div>
+                <div class="stn" style="text-align: right;">
+                    <div class="stn-code">{{ to_stn_name[:3]|upper }}</div>
+                    <div class="stn-name" style="margin-left: auto;">{{ to_stn_name }}</div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if routes %}
+                {% for route in routes %}
+                <div class="route-card" data-route-id="{{ route.route_id }}" onclick="selectRoute({{ route.route_id }})">
+                    <div class="route-card-header">
+                        <div class="route-num">{{ route.route_id }}</div>
+                        <div class="route-type">Option {{ route.route_id }} · {{ route.type }}</div>
+                        {% if route.best %}<span class="route-badge-best">🏆 Optimal</span>{% endif %}
+                    </div>
+                    <div class="route-steps">
+                        {% for step in route.steps %}
+                        <div class="step-row">
+                            <span class="step-icon">
+                                {% if step.mode == 'TRAIN' %}🚆{% else %}🚗{% endif %}
+                            </span>
+                            <div class="step-info">
+                                <div class="step-label">Step {{ step.step }} · {{ step.mode }} Vector</div>
+                                <div class="step-route-text">{{ step.from }} → {{ step.to }}</div>
+                                {% if step.mode == 'TRAIN' and step.data %}
+                                    <div class="train-mini">
+                                        <b>{{ step.data[0][1] }}</b> · {{ step.data[0][2] }} mins
+                                        {% if step.data[0][5] %} · {{ step.data[0][5] }} km{% endif %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div style="margin-top: 14px; display: flex; justify-content: flex-end;">
+                        <a href="https://www.irctc.co.in/nget/train-search" target="_blank" style="font-size: 12px; color: var(--blue-neon); text-decoration: none; font-weight: 600; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; border: 1px solid var(--border-glow); padding: 4px 10px; border-radius: 4px; transition: var(--transition);" onclick="event.stopPropagation();">🚆 Book on IRCTC →</a>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="empty-state">
+                    <div class="icon">🚂</div>
+                    <h2>No rail corridors located</h2>
+                    <p>Modify route terminals or change calendar parameters.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="map-container">
+        <div class="map-info-bar" id="mapInfoBar">
+            <div id="mapTitle"></div>
+            <div id="mapSubtitle"></div>
+        </div>
+
+        {% if routes %}
+            <div id="leafletMap"></div>
+        {% else %}
+            <div class="map-placeholder">
+                <div class="icon-big">🚆</div>
+                <p><b>No routes active</b><br>Awaiting terminal verification</p>
+            </div>
+        {% endif %}
+
+        <div class="leg-cards-wrap" id="legCardsWrap">
+            <div class="leg-cards" id="legCards"></div>
+        </div>
+    </div>
+</div>
+
+{% if routes %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const FROM_LAT = {{ from_lat or 'null' }};
+const FROM_LON = {{ from_lon or 'null' }};
+const TO_LAT   = {{ to_lat or 'null' }};
+const TO_LON   = {{ to_lon or 'null' }};
+const FROM_STN_LAT = {{ from_stn_lat or 'null' }};
+const FROM_STN_LON = {{ from_stn_lon or 'null' }};
+const TO_STN_LAT   = {{ to_stn_lat or 'null' }};
+const TO_STN_LON   = {{ to_stn_lon or 'null' }};
+const FROM_STN_NAME = "{{ from_stn_name }}";
+const TO_STN_NAME   = "{{ to_stn_name }}";
+const SOURCE = "{{ source }}";
+const DESTINATION = "{{ destination }}";
+
+const map = L.map('leafletMap', { zoomControl: true });
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+let mapLayers = [];
+
+function clearMap() {
+  mapLayers.forEach(l => map.removeLayer(l));
+  mapLayers = [];
+}
+
+async function fetchGroundRoute(fromLat, fromLon, toLat, toLon) {
+  const url = `https://router.project-osrm.org/route/v1/driving/${fromLon},${fromLat};${toLon},${toLat}?overview=full&geometries=geojson`;
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    if (data.routes && data.routes[0]) {
+      const coords = data.routes[0].geometry.coordinates.map(c => [c[1], c[0]]);
+      const dist = (data.routes[0].distance / 1000).toFixed(1);
+      const dur = Math.round(data.routes[0].duration / 60);
+      return { coords, dist, dur };
+    }
+  } catch(e) { console.error(e); }
+  return null;
+}
+
+function generateArc(start, end, segments = 50) {
+  const latlngs = [];
+  const lat1 = start[0], lon1 = start[1];
+  const lat2 = end[0], lon2 = end[1];
+  const dx = lon2 - lon1, dy = lat2 - lat1;
+  const dist = Math.sqrt(dx*dx + dy*dy);
+  const bulge = Math.min(dist * 0.12, 2.5);
+
+  for (let i = 0; i <= segments; i++) {
+    const t = i / segments;
+    const lat = lat1 + (lat2 - lat1) * t;
+    const lon = lon1 + (lon2 - lon1) * t;
+    const offset = bulge * Math.sin(Math.PI * t);
+    const angle = Math.atan2(dy, dx) + Math.PI / 2;
+    latlngs.push([lat + offset * Math.cos(angle), lon + offset * Math.sin(angle)]);
+  }
+  return latlngs;
+}
+
+async function drawRoute(routeId) {
+  clearMap();
+  if (!FROM_STN_LAT || !TO_STN_LAT || !FROM_LAT || !TO_LAT) return;
+
+  const bounds = L.latLngBounds([]);
+  document.getElementById('mapTitle').textContent = `Transit Option ${routeId} Vector`;
+  document.getElementById('mapSubtitle').textContent = `${SOURCE} → ${FROM_STN_NAME} → ${TO_STN_NAME} → ${DESTINATION}`;
+  document.getElementById('mapInfoBar').classList.add('visible');
+
+  const legCards = document.getElementById('legCards');
+  legCards.innerHTML = '';
+
+  const ground1 = await fetchGroundRoute(FROM_LAT, FROM_LON, FROM_STN_LAT, FROM_STN_LON);
+  if (ground1 && parseFloat(ground1.dist) > 1) {
+    const line = L.polyline(ground1.coords, { color: '#3b82f6', weight: 4, opacity: 0.85 });
+    line.addTo(map); mapLayers.push(line);
+    ground1.coords.forEach(c => bounds.extend(c));
+
+    const label = L.marker(ground1.coords[Math.floor(ground1.coords.length / 2)], {
+      icon: L.divIcon({ className: 'ground-label', html: `🚗 ${ground1.dist} km · ${ground1.dur} min` })
+    });
+    label.addTo(map); mapLayers.push(label);
+
+    legCards.innerHTML += `
+      <div class="leg-card ground-leg">
+        <div class="leg-label">🚗 Cab to Station</div>
+        <div class="leg-route">${SOURCE.split(',')[0]} → ${FROM_STN_NAME}</div>
+        <div class="leg-detail">${ground1.dur} min</div>
+        <div class="leg-extra">${ground1.dist} km</div>
+      </div>`;
+  }
+
+  const startMarker = L.marker([FROM_LAT, FROM_LON], {
+    icon: L.divIcon({ html: `<div style="background:#3b82f6;color:#fff;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;box-shadow:var(--shadow-card);white-space:nowrap;">📍 Start</div>` })
+  });
+  startMarker.addTo(map); mapLayers.push(startMarker);
+  bounds.extend([FROM_LAT, FROM_LON]);
+
+  const stnMarker1 = L.circleMarker([FROM_STN_LAT, FROM_STN_LON], { radius: 6, fillColor: '#f59e0b', fillOpacity: 1, color: '#fff', weight: 2 });
+  stnMarker1.addTo(map); mapLayers.push(stnMarker1);
+  L.marker([FROM_STN_LAT, FROM_STN_LON], { icon: L.divIcon({ className: 'station-label', html: `🚉 ${FROM_STN_NAME}`, iconAnchor: [0, -12] }) }).addTo(map).prevLayer = mapLayers.push(stnMarker1);
+
+  const arc = generateArc([FROM_STN_LAT, FROM_STN_LON], [TO_STN_LAT, TO_STN_LON]);
+  const trackBed = L.polyline(arc, { color: '#f59e0b', weight: 5, opacity: 0.8 });
+  trackBed.addTo(map); mapLayers.push(trackBed);
+
+  const railLines = L.polyline(arc, { color: '#ffffff', weight: 1.5, opacity: 0.9, dashArray: '6, 10' });
+  railLines.addTo(map); mapLayers.push(railLines);
+  arc.forEach(c => bounds.extend(c));
+
+  L.marker(arc[Math.floor(arc.length / 2)], { icon: L.divIcon({ className: 'train-label', html: `🚆 Rail Corridor` }) }).addTo(map);
+
+  legCards.innerHTML += `
+    <div class="leg-card train-leg">
+      <div class="leg-label">🚆 Rail Vector</div>
+      <div class="leg-route">${FROM_STN_NAME} → ${TO_STN_NAME}</div>
+      <div class="leg-detail">Express Corridor</div>
+    </div>`;
+
+  const stnMarker2 = L.circleMarker([TO_STN_LAT, TO_STN_LON], { radius: 6, fillColor: '#f59e0b', fillOpacity: 1, color: '#fff', weight: 2 });
+  stnMarker2.addTo(map); mapLayers.push(stnMarker2);
+  L.marker([TO_STN_LAT, TO_STN_LON], { icon: L.divIcon({ className: 'station-label', html: `🚉 ${TO_STN_NAME}`, iconAnchor: [0, -12] }) }).addTo(map);
+
+  const ground2 = await fetchGroundRoute(TO_STN_LAT, TO_STN_LON, TO_LAT, TO_LON);
+  if (ground2 && parseFloat(ground2.dist) > 1) {
+    const line = L.polyline(ground2.coords, { color: '#10b981', weight: 4, opacity: 0.85 });
+    line.addTo(map); mapLayers.push(line);
+    ground2.coords.forEach(c => bounds.extend(c));
+
+    const label = L.marker(ground2.coords[Math.floor(ground2.coords.length / 2)], {
+      icon: L.divIcon({ className: 'ground-label', html: `🚗 ${ground2.dist} km · ${ground2.dur} min` })
+    });
+    label.addTo(map); mapLayers.push(label);
+
+    legCards.innerHTML += `
+      <div class="leg-card ground-leg" style="border-left-color: var(--green);">
+        <div class="leg-label">🚗 Cab from Station</div>
+        <div class="leg-route">${TO_STN_NAME} → ${DESTINATION.split(',')[0]}</div>
+        <div class="leg-detail">${ground2.dur} min</div>
+        <div class="leg-extra">${ground2.dist} km</div>
+      </div>`;
+  }
+
+  const endMarker = L.marker([TO_LAT, TO_LON], {
+    icon: L.divIcon({ html: `<div style="background:#10b981;color:#fff;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;box-shadow:var(--shadow-card);white-space:nowrap;">📍 End</div>` })
+  });
+  endMarker.addTo(map); mapLayers.push(endMarker);
+  bounds.extend([TO_LAT, TO_LON]);
+
+  map.fitBounds(bounds, { padding: [50, 50] });
+  document.getElementById('legCardsWrap').classList.add('visible');
+}
+
+function selectRoute(routeId) {
+  document.querySelectorAll('.route-card').forEach(c => c.classList.remove('selected'));
+  const el = document.querySelector(`[data-route-id="${routeId}"]`);
+  if(el) el.classList.add('selected');
+  drawRoute(routeId);
+}
+
+(function() {
+  if (FROM_STN_LAT && TO_STN_LAT && FROM_LAT && TO_LAT) {
+    const bounds = L.latLngBounds([[FROM_LAT, FROM_LON], [TO_LAT, TO_LON], [FROM_STN_LAT, FROM_STN_LON], [TO_STN_LAT, TO_STN_LON]]);
+    map.fitBounds(bounds, { padding: [60, 60] });
+  } else {
+    map.setView([22, 78], 5);
+  }
+})();
+</script>
+{% endif %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        lucide.createIcons();
+    });
+</script>
+</body>
+</html>

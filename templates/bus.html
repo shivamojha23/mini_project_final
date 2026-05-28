@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Bus Routes — {{ source }} to {{ destination }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-deep:    #050d1a;
+            --bg-panel:   #091325;
+            --bg-card:    #0d1e36;
+            --bg-card2:   #0f2340;
+            --border:     rgba(30,90,180,0.22);
+            --border-glow:rgba(59,130,246,0.45);
+            --blue-vivid: #3b82f6;
+            --blue-neon:  #00aaff;
+            --blue-mid:   #1d6fd8;
+            --gold:       #f59e0b;
+            --green:      #10b981;
+            --text-pri:   #e2eafc;
+            --text-sec:   #8da2c4;
+            --text-muted: #4e6180;
+            --accent-rec: #00ffcc;
+            --shadow-blue:0 0 15px rgba(0,170,255,0.25);
+            --shadow-card:0 10px 30px rgba(2,5,12,0.6);
+            --radius:     12px;
+            --radius-sm:  6px;
+            --transition: all 0.25s ease;
+            --bus-color:  #f97316;
+            --bus-dark:   #ea580c;
+        }
+
+        html, body {
+            height: 100%; width: 100%;
+            font-family: 'Exo 2', sans-serif;
+            background: var(--bg-deep);
+            color: var(--text-pri);
+            overflow: hidden;
+        }
+
+        /* ── SYSTEM ICON UTILITIES ── */
+        .nav-icon {
+            width: 18px;
+            height: 18px;
+            color: var(--text-sec);
+            transition: var(--transition);
+        }
+        .inline-icon {
+            width: 16px;
+            height: 16px;
+            color: var(--blue-neon);
+            vertical-align: middle;
+            margin-right: 4px;
+        }
+
+        /* ── MODULAR DARK TRANSFERENCE SIDEBAR ── */
+        .module-nav {
+            position: fixed; left: 0; top: 0;
+            width: 180px; height: 100vh;
+            background: #111622;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex; flex-direction: column;
+            padding: 24px 12px;
+            gap: 6px; z-index: 100;
+        }
+        .module-nav .nav-logo {
+            padding: 0 12px;
+            margin-bottom: 24px; text-decoration: none;
+            transition: var(--transition);
+            color: var(--blue-neon);
+            display: flex;
+            align-items: center;
+        }
+        .module-nav .nav-logo:hover { transform: scale(1.02); }
+        
+        .module-nav a.nav-btn {
+            width: 100%; height: 44px;
+            border-radius: 8px;
+            display: flex; 
+            align-items: center; 
+            justify-content: flex-start;
+            text-decoration: none;
+            color: var(--text-sec);
+            transition: var(--transition);
+            padding: 0 14px;
+            gap: 12px;
+            border: 1px solid transparent;
+            position: relative;
+        }
+        
+        .module-nav a.nav-btn:hover {
+            background: rgba(255, 255, 255, 0.03);
+            color: #fff;
+        }
+        .module-nav a.nav-btn:hover .nav-icon {
+            color: #fff;
+        }
+        
+        /* Glow Active Dot styling precisely synchronized */
+        .module-nav a.nav-btn.active {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+        }
+        .module-nav a.nav-btn.active .nav-icon {
+            color: var(--accent-rec);
+        }
+        .module-nav a.nav-btn.active::before {
+            content: '';
+            position: absolute;
+            right: 14px;
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent-rec);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-rec);
+        }
+
+        .module-nav a.nav-btn .nav-text {
+            font-size: 13px; font-weight: 500;
+            font-family: 'Exo 2', sans-serif;
+            text-transform: capitalize;
+            text-align: left;
+        }
+        .module-nav .nav-spacer { flex: 1; }
+        .module-nav .nav-divider {
+            width: 100%; height: 1px;
+            background: rgba(255,255,255,0.05); margin: 8px 0;
+        }
+
+        /* ── LAYOUT MATRIX CONTAINER ── */
+        .container {
+            display: flex; height: 100vh;
+            width: calc(100% - 180px);
+            margin-left: 180px;
+        }
+
+        /* ── LEFT BUS CONFIG LIST ── */
+        .sidebar {
+            width: 420px; min-width: 420px;
+            background: var(--bg-panel);
+            border-right: 1px solid var(--border);
+            overflow-y: auto;
+            display: flex; flex-direction: column;
+            z-index: 10;
+            box-shadow: 10px 0 30px rgba(0,0,0,0.2);
+        }
+        .sidebar::-webkit-scrollbar { width: 6px; }
+        .sidebar::-webkit-scrollbar-track { background: transparent; }
+        .sidebar::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.2); border-radius: 10px; }
+
+        .header {
+            padding: 32px 28px 24px;
+            background: linear-gradient(180deg, rgba(9,19,37,0.6) 0%, rgba(9,19,37,0) 100%);
+            position: relative;
+        }
+        .header-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(249, 115, 22, 0.1);
+            border: 1px solid rgba(249, 115, 22, 0.4);
+            border-radius: 30px;
+            padding: 4px 14px;
+            font-size: 11px; font-weight: 600; letter-spacing: 1px;
+            color: var(--bus-color); text-transform: uppercase;
+            font-family: 'Rajdhani', sans-serif;
+            margin-bottom: 12px;
+        }
+        .header h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 32px; font-weight: 700;
+            color: #fff; letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+        .header h1 span { color: var(--bus-color); text-shadow: 0 0 10px rgba(249,115,22,0.3); }
+        
+        .header-route { display: flex; align-items: center; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+        .header-route .city { font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 15px; color: var(--text-pri); }
+        .header-route .arrow { color: var(--bus-color); font-size: 14px; }
+        .header-route .date-badge {
+            background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text-sec);
+            padding: 3px 10px; border-radius: 12px; font-size: 11px; margin-left: auto;
+            font-family: 'Rajdhani', sans-serif; font-weight: 600;
+        }
+
+        .content { padding: 0 28px 32px; flex: 1; }
+
+        /* ── SUMMARY SECTION ── */
+        .summary-strip {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border);
+        }
+        .summary-strip h2 { font-family: 'Rajdhani', sans-serif; font-size: 15px; font-weight: 600; text-transform: uppercase; color: var(--text-sec); }
+        .summary-strip h2 span { color: var(--bus-color); }
+        .summary-strip .pill {
+            background: rgba(249,115,22,0.1); color: var(--bus-color); font-size: 11px; font-weight: 600;
+            padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(249,115,22,0.25);
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        /* ── RE-ENGINEERED BUS CARDS ── */
+        .bus-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+            padding: 18px; margin-bottom: 12px; cursor: pointer; transition: var(--transition);
+        }
+        .bus-card:hover { border-color: var(--bus-color); background: var(--bg-card2); }
+        .bus-card.selected { border-color: var(--bus-color); background: var(--bg-card2); box-shadow: 0 0 15px rgba(249,115,22,0.15); }
+
+        .bus-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+        .bus-num {
+            width: 26px; height: 26px; border-radius: 6px; background: rgba(249,115,22,0.15); color: var(--bus-color);
+            font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 12px;
+            display: flex; align-items: center; justify-content: center; border: 1px solid rgba(249,115,22,0.2);
+        }
+        .bus-operator { font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 16px; color: #fff; text-transform: uppercase; flex: 1; }
+        .bus-price { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 18px; color: var(--green); }
+
+        .bus-details { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: var(--text-sec); }
+        .bus-detail-item b { color: #fff; font-weight: 500; }
+        .bus-type-badge {
+            background: rgba(255,255,255,0.03); color: var(--text-sec); font-size: 11px; font-weight: 500;
+            padding: 4px 10px; border-radius: 6px; display: inline-block; margin-top: 10px;
+            border: 1px solid var(--border);
+        }
+        .bus-rating { display: flex; align-items: center; gap: 4px; margin-left: auto;}
+        .bus-rating-badge {
+            background: rgba(16,185,129,0.1); color: #34d399; font-size: 11px; font-weight: 700;
+            padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(16,185,129,0.2);
+        }
+        .bus-link {
+            display: block; margin-top: 12px; font-size: 12px; color: var(--blue-neon);
+            text-decoration: none; font-weight: 600; font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase; transition: var(--transition);
+        }
+        .bus-link:hover { text-decoration: underline; color: #fff; }
+
+        /* ── EMPTY DATA CONTEXTS ── */
+        .empty-state { text-align: center; padding: 60px 20px; color: var(--text-sec); }
+        .empty-state .icon { font-size: 40px; margin-bottom: 12px; opacity: 0.5; }
+        .empty-state h2 { font-family: 'Rajdhani', sans-serif; color: #fff; font-size: 18px; margin-bottom: 6px; }
+
+        /* ── RIGHT MAP AREA ── */
+        .map-container { flex: 1; background: var(--bg-deep); position: relative; overflow: hidden; display: flex; flex-direction: column; }
+        #leafletMap { flex: 1; width: 100%; z-index: 1; }
+        .map-placeholder {
+            width: 100%; height: 100%; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; color: var(--text-muted); text-align: center;
+        }
+        .map-placeholder .icon-big { font-size: 48px; margin-bottom: 12px; opacity: 0.3; }
+
+        /* FLOATING OVERLAY BAR RE-STYLED TO MATCH GLOBAL PROFILE */
+        .map-info-bar {
+            position: absolute; top: 24px; left: 24px;
+            background: rgba(9, 19, 37, 0.85); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 14px 20px; backdrop-filter: blur(16px);
+            z-index: 500; min-width: 280px; box-shadow: var(--shadow-card);
+            display: none; animation: fadeIn 0.4s ease;
+        }
+        .map-info-bar.visible { display: block; }
+        #mapTitle { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 15px; color: #fff; text-transform: uppercase; }
+        #mapSubtitle { font-size: 11px; color: var(--text-sec); margin-top: 2px; }
+
+        /* FOOTER ROUTE TIMELINE CARDS */
+        .leg-cards-wrap { display: none; padding: 16px 24px; background: var(--bg-panel); border-top: 1px solid var(--border); z-index: 10; }
+        .leg-cards-wrap.visible { display: block; }
+        .leg-cards { display: flex; gap: 12px; flex-wrap: wrap; }
+        .leg-card {
+            flex: 1; min-width: 160px; background: var(--bg-card);
+            border-radius: var(--radius-sm); padding: 12px 16px; border-left: 3px solid var(--blue-neon);
+            border: 1px solid var(--border); border-left: 3px solid var(--blue-neon);
+        }
+        .leg-card.bus-leg { border-left-color: var(--bus-color); }
+        .leg-card .leg-label { font-size: 10px; color: var(--text-sec); margin-bottom: 3px; font-weight: 600; text-transform: uppercase; font-family: 'Rajdhani', sans-serif; letter-spacing: 0.5px; }
+        .leg-card .leg-route { font-size: 13px; font-weight: 600; color: #fff; }
+        .leg-card .leg-detail { font-size: 12px; color: var(--text-sec); margin-top: 4px; }
+
+        .bus-route-label {
+            background: var(--bg-panel); border: 1px solid var(--bus-color); color: #fff;
+            font-family: 'Exo 2', sans-serif; font-size: 11px; font-weight: 500;
+            padding: 4px 10px; border-radius: 4px; white-space: nowrap;
+            box-shadow: var(--shadow-card);
+        }
+
+        /* DARK MAP INVERSION OVERRIDES */
+        .leaflet-tile { filter: invert(1) hue-rotate(190deg) brightness(0.75) saturate(0.8); }
+        .leaflet-container { background: var(--bg-deep) !important; }
+        .leaflet-popup-content-wrapper { background: var(--bg-panel) !important; border: 1px solid var(--border) !important; color: #fff !important; border-radius: 8px !important; }
+        .leaflet-popup-tip { background: var(--bg-panel) !important; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+
+        @media (max-width: 1024px) {
+            .container { flex-direction: column; width: calc(100% - 180px); margin-left: 180px; }
+            .sidebar { width: 100%; height: 45%; min-width: unset; border-right: none; border-bottom: 1px solid var(--border); }
+            .map-container { height: 55%; }
+            .map-info-bar { top: 16px; left: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="module-nav">
+    <a href="#" class="nav-logo">
+        <i data-lucide="globe" style="width: 22px; height: 22px; margin-right: 10px;"></i>
+        <span style="font-family: 'Rajdhani', sans-serif; font-weight:700; font-size:18px; color:#fff;">Hub</span>
+    </a>
+    <a href="/?source={{ source }}&destination={{ destination }}&module=route" class="nav-btn" title="Route">
+        <i data-lucide="map" class="nav-icon"></i>
+        <span class="nav-text">Map</span>
+    </a>
+    <a href="/plan?source={{ source }}&destination={{ destination }}&date={{ date }}" class="nav-btn" title="Train">
+        <i data-lucide="train" class="nav-icon"></i>
+        <span class="nav-text">Train</span>
+    </a>
+    <a href="#" class="nav-btn active" title="Bus">
+        <i data-lucide="bus" class="nav-icon"></i>
+        <span class="nav-text">Bus</span>
+    </a>
+    <a href="/flight/results?from_place={{ source }}&to_place={{ destination }}&date={{ date }}" class="nav-btn" title="Flight">
+        <i data-lucide="plane" class="nav-icon"></i>
+        <span class="nav-text">Flights</span>
+    </a>
+    <div class="nav-spacer"></div>
+    <div class="nav-divider"></div>
+    <a href="/" class="nav-btn" title="New Search">
+        <i data-lucide="rotate-ccw" class="nav-icon" style="color: var(--accent-rec);"></i>
+        <span class="nav-text" style="color: var(--accent-rec);">New Search</span>
+    </a>
+    <a href="/logout" class="nav-btn" title="Logout" style="color:#ef4444;">
+        <i data-lucide="log-out" class="nav-icon" style="color:#ef4444;"></i>
+        <span class="nav-text">Logout</span>
+    </a>
+</div>
+
+<div class="container">
+    <div class="sidebar">
+        <div class="header">
+            <div class="header-badge">
+                <i data-lucide="shield-check" class="inline-icon"></i> Smart Travel Hub
+            </div>
+            <h1>BUS <span>SEARCH</span></h1>
+            <div class="header-route">
+                <span class="city">{{ source.split(',')[0] }}</span>
+                <span class="arrow">→</span>
+                <span class="city">{{ destination.split(',')[0] }}</span>
+                {% if date %}<span class="date-badge">{{ date }}</span>{% endif %}
+            </div>
+        </div>
+
+        <div class="content">
+            {% if buses %}
+            <div class="summary-strip">
+                <h2>Found <span>{{ buses|length }} bus{{ 'es' if buses|length > 1 else '' }}</span></h2>
+                <div class="pill">Source: RedBus</div>
+            </div>
+
+            {% for bus in buses %}
+            <div class="bus-card" data-idx="{{ loop.index0 }}" onclick="selectBus({{ loop.index0 }})">
+                <div class="bus-card-header">
+                    <div class="bus-num">{{ loop.index }}</div>
+                    <div class="bus-operator">{{ bus.operator or 'Bus Operator' }}</div>
+                    <div class="bus-price">₹{{ bus.price }}</div>
+                </div>
+                <div class="bus-details">
+                    {% if bus.depart %}<div class="bus-detail-item">🕐 Depart: <b>{{ bus.depart }}</b></div>{% endif %}
+                    {% if bus.duration %}<div class="bus-detail-item">⏱ Duration: <b>{{ bus.duration }}h</b></div>{% endif %}
+                    {% if bus.rating %}
+                    <div class="bus-rating">
+                        <span class="bus-rating-badge">⭐ {{ bus.rating }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+                {% if bus.bus_type %}<div class="bus-type-badge">{{ bus.bus_type }}</div>{% endif %}
+                {% if bus.link %}<a href="{{ bus.link }}" target="_blank" class="bus-link">🔗 Book on RedBus →</a>{% endif %}
+            </div>
+            {% endfor %}
+
+            {% else %}
+            <div class="empty-state">
+                <div class="icon">🚌</div>
+                <h2>No buses found</h2>
+                <p>Try different cities or travel dates.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="map-container">
+        <div class="map-info-bar" id="mapInfoBar">
+            <div id="mapTitle">Bus Route</div>
+            <div id="mapSubtitle"></div>
+        </div>
+
+        {% if from_lat and to_lat %}
+            <div id="leafletMap"></div>
+        {% else %}
+            <div class="map-placeholder">
+                <div class="icon-big">🚌</div>
+                <p><b>Enter source & destination</b><br>to see the bus route on map</p>
+            </div>
+        {% endif %}
+
+        <div class="leg-cards-wrap" id="legCardsWrap">
+            <div class="leg-cards" id="legCards"></div>
+        </div>
+    </div>
+</div>
+
+{% if from_lat and to_lat %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const FROM_LAT = {{ from_lat }};
+const FROM_LON = {{ from_lon }};
+const TO_LAT   = {{ to_lat }};
+const TO_LON   = {{ to_lon }};
+const SOURCE = "{{ source }}";
+const DESTINATION = "{{ destination }}";
+
+const map = L.map('leafletMap', { zoomControl: true });
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+let mapLayers = [];
+function clearMap() {
+    mapLayers.forEach(l => map.removeLayer(l));
+    mapLayers = [];
+}
+
+async function fetchRoadRoute(fromLat, fromLon, toLat, toLon) {
+    const url = `https://router.project-osrm.org/route/v1/driving/${fromLon},${fromLat};${toLon},${toLat}?overview=full&geometries=geojson`;
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+        if (data.routes && data.routes[0]) {
+            const coords = data.routes[0].geometry.coordinates.map(c => [c[1], c[0]]);
+            const dist = (data.routes[0].distance / 1000).toFixed(1);
+            const dur = Math.round(data.routes[0].duration / 60);
+            return { coords, dist, dur };
+        }
+    } catch(e) { console.error('OSRM error:', e); }
+    return null;
+}
+
+async function drawBusRoute(busIdx) {
+    clearMap();
+
+    const infoBar = document.getElementById('mapInfoBar');
+    const legCardsWrap = document.getElementById('legCardsWrap');
+    const legCards = document.getElementById('legCards');
+    legCards.innerHTML = '';
+
+    document.getElementById('mapTitle').textContent = `🚌 Bus Route — ${SOURCE.split(',')[0]} → ${DESTINATION.split(',')[0]}`;
+    document.getElementById('mapSubtitle').textContent = 'Road route via OSRM Engine';
+    infoBar.classList.add('visible');
+
+    const bounds = L.latLngBounds([]);
+    const route = await fetchRoadRoute(FROM_LAT, FROM_LON, TO_LAT, TO_LON);
+
+    if (route) {
+        const bed = L.polyline(route.coords, { color: '#fdba74', weight: 7, opacity: 0.3 });
+        bed.addTo(map); mapLayers.push(bed);
+
+        const line = L.polyline(route.coords, { color: '#f97316', weight: 4, opacity: 0.9 });
+        line.addTo(map); mapLayers.push(line);
+
+        route.coords.forEach(c => bounds.extend(c));
+
+        const mid = route.coords[Math.floor(route.coords.length / 2)];
+        const label = L.marker(mid, {
+            icon: L.divIcon({ className: 'bus-route-label', html: `🚌 ${route.dist} km · ${route.dur} min` })
+        });
+        label.addTo(map); mapLayers.push(label);
+
+        const durStr = route.dur >= 60
+            ? `${Math.floor(route.dur/60)}h ${route.dur%60}m`
+            : `${route.dur} min`;
+
+        legCards.innerHTML = `
+            <div class="leg-card bus-leg">
+                <div class="leg-label">🚌 BUS ROUTE</div>
+                <div class="leg-route">${SOURCE.split(',')[0]} → ${DESTINATION.split(',')[0]}</div>
+                <div class="leg-detail">${durStr} · ${route.dist} km by road</div>
+            </div>`;
+    }
+
+    const startMarker = L.marker([FROM_LAT, FROM_LON], {
+        icon: L.divIcon({
+            className: '', html: `<div style="background:#3b82f6;color:#fff;padding:4px 10px;border-radius:6px;font-size:12px;font-weight:700;font-family:'Rajdhani',sans-serif;box-shadow:0 2px 8px rgba(0,0,0,0.2);white-space:nowrap;">📍 ${SOURCE.split(',')[0]}</div>`
+        })
+    }).bindPopup(`<b>🚏 Start</b><br>${SOURCE}`);
+    startMarker.addTo(map); mapLayers.push(startMarker);
+    bounds.extend([FROM_LAT, FROM_LON]);
+
+    const busStop1 = L.circleMarker([FROM_LAT, FROM_LON], {
+        radius: 8, fillColor: '#f97316', fillOpacity: 1, color: '#fff', weight: 3
+    }).bindPopup(`<b>🚏 Bus Stop</b><br>${SOURCE}`);
+    busStop1.addTo(map); mapLayers.push(busStop1);
+
+    const endMarker = L.marker([TO_LAT, TO_LON], {
+        icon: L.divIcon({
+            className: '', html: `<div style="background:#3b82f6;color:#fff;padding:4px 10px;border-radius:6px;font-size:12px;font-weight:700;font-family:'Rajdhani',sans-serif;box-shadow:0 2px 8px rgba(0,0,0,0.2);white-space:nowrap;">📍 ${DESTINATION.split(',')[0]}</div>`
+        })
+    }).bindPopup(`<b>🚏 End</b><br>${DESTINATION}`);
+    endMarker.addTo(map); mapLayers.push(endMarker);
+    bounds.extend([TO_LAT, TO_LON]);
+
+    const busStop2 = L.circleMarker([TO_LAT, TO_LON], {
+        radius: 8, fillColor: '#f97316', fillOpacity: 1, color: '#fff', weight: 3
+    }).bindPopup(`<b>🚏 Bus Stop</b><br>${DESTINATION}`);
+    busStop2.addTo(map); mapLayers.push(busStop2);
+
+    map.fitBounds(bounds, { padding: [40, 40] });
+    legCardsWrap.classList.add('visible');
+}
+
+function selectBus(idx) {
+    document.querySelectorAll('.bus-card').forEach(c => c.classList.remove('selected'));
+    const card = document.querySelector(`[data-idx="${idx}"]`);
+    if (card) card.classList.add('selected');
+    drawBusRoute(idx);
+}
+
+(function() {
+    const bounds = L.latLngBounds([[FROM_LAT, FROM_LON], [TO_LAT, TO_LON]]);
+    map.fitBounds(bounds, { padding: [60, 60] });
+})();
+</script>
+{% endif %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        lucide.createIcons();
+    });
+</script>
+</body>
+</html>
